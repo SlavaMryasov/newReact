@@ -1,4 +1,66 @@
-ul{
-  color: red;
-  font-size: large;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+  height: 100%;
+}
+
+.modules {
+  display: flex;
+  justify-content: center;
+}
+
+.app-wrapper {
+  width: 70%;
+  display: grid;
+  grid-template-areas:
+    "h h"
+    "n c";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+}
+
+.header {
+  border-radius: 10px;
+  margin: 5px;
+  grid-area: h;
+  background-color: rgb(205, 205, 245);
+}
+
+.nav {
+  grid-area: n;
+  background-color: rgb(255, 192, 229);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.content {
+  grid-area: c;
+  background-color: rgb(191, 247, 139);
+  border-radius: 10px;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.img {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.background {
+  width: 100%;
+}
+
+.data {
+  height: 50%;
+  background-color: red;
+  margin-top: 5px;
+  border-radius: 10px;
 }
