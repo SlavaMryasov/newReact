@@ -1,28 +1,15 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Profile from "./components/Profile";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div className="modules">
       <div className="app-wrapper">
-        <header className="header">
-          <img id="logo" src={logo} />
-        </header>
-        <nav className="nav">
-          <div><a>Profile</a></div>
-          <div><a>Messages</a></div>
-          <div><a>News</a></div>
-          <div><a>Music</a></div>
-          <div><a>Settings</a></div>
-        </nav>
-        <div className="content">
-          <div className="img">
-            <img className="background" src="https://fullhdoboi.ru/wp-content/uploads/_ph/6/283114741.jpg" />
-          </div>
-          <div className="data">
-
-          </div>
-        </div>
+        <Header />
+        <Navbar />
+        <Profile />
       </div>
     </div>
   );

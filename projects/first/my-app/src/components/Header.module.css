@@ -1,0 +1,10 @@
+.logo {
+  height: 100%;
+}
+
+.header {
+  border-radius: 10px;
+  margin: 5px;
+  grid-area: h;
+  background-color: rgb(56, 37, 1);
+}

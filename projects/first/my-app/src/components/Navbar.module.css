@@ -1,0 +1,11 @@
+.nav {
+  grid-area: n;
+  /* background-color: rgb(250, 242, 247); */
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.nav div {
+  padding: 5%;
+}
