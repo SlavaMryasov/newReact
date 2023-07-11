@@ -1,4 +1,3 @@
-import logo from "../logo.svg";
 import styles from './Navbar.module.css'
 
 const Navbar = () => {
