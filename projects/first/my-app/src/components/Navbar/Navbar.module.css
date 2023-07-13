@@ -3,9 +3,21 @@
   /* background-color: rgb(250, 242, 247); */
   border-radius: 10px;
   margin: 5px;
-  padding: 5px;
+  padding-top: 3%;
 }
 
-.nav div {
-  padding: 5%;
+.item {
+  padding-bottom: 10%;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a.active {
+  background-color: rgb(238, 244, 252);
+  padding: 2%;
+  padding-right: 76%;
+  padding-left: 0;
 }

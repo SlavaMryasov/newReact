@@ -1,0 +1,10 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  background-color: rgb(252, 252, 252);
+  border-radius: 10px;
+}
+
+.dialogsItems {
+  padding: 10px;
+}
