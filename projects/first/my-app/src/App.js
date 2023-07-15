@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Dialogs from "./components/Dialogs/Dialogs";
 import { Routes, Route } from "react-router-dom";
 
-const App = () => {
+const App = (props) => {
   return (
 
     <div className="modules">
@@ -15,7 +15,7 @@ const App = () => {
         <div className='app-wrapper-content'>
           <Routes>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/dialogs" element={<Dialogs />} />
+            <Route path="/dialogs" element={<Dialogs  dialogsPage={props.state.dialogsPage}/>} />
           </Routes>
         </div>
       </div>
