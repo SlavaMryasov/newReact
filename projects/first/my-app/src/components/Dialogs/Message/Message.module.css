@@ -1,0 +1,32 @@
+
+.message {
+    margin-right: 1%;
+    padding: 1%;
+}
+
+.messageMe {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.messageMe div {
+    padding: 0.5%;
+    background-color: rgb(140, 180, 241);
+    border-radius: 5px;
+    display: flex;
+    max-width: 60%;
+}
+
+.companion{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.companion div{
+    display: flex;
+    padding: 0.5%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    max-width: 60%;
+}

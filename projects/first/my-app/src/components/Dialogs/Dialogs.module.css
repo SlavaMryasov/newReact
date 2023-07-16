@@ -3,8 +3,38 @@
   grid-template-columns: 2fr 10fr;
   background-color: rgb(252, 252, 252);
   border-radius: 10px;
+  height: 100%;
 }
 
 .dialogsItems {
   padding: 10px;
+}
+
+.messages{
+  background-image: url('https://phonoteka.org/uploads/posts/2021-04/1619209324_23-phonoteka_org-p-fon-vatsap-standartnii-34.jpg');
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+
+}
+
+.newMessage{
+  display: flex;
+  justify-content: end;
+  padding: 5px;
+  background-color: rgb(208, 216, 216);
+  border-radius: 10px;
+  margin: 5px;
+ 
+}
+
+input {
+  width: 90%;
+ 
+}
+button {
+  width: 10%;
 }
