@@ -17,7 +17,15 @@ let inputRef = React.createRef();
 let sendMessage = ()=>{
   let text = inputRef.current.value;
   props.addMessage(text)
+ 
 }
+
+let characterToState = () => {
+  let text = inputRef.current.value;
+  props.characterDisplay(text);
+  console.log(text)
+}
+
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogsItems}>
@@ -26,8 +34,8 @@ let sendMessage = ()=>{
       <div className={styles.messages}>
         {messagesElements}
         <div className={styles.newMessage}>
-        <input ref={inputRef}/>
-        <button onClick={sendMessage}>send</button>
+        <input onChange={characterToState} ref={inputRef}/>
+        <button  onClick={sendMessage}>send</button>
         </div>
       </div>
     </div>

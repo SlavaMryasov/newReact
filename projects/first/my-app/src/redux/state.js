@@ -1,8 +1,7 @@
+import { rerender } from "../rerender"
 
   
  
-  
-
   let state = {
     dialogsPage: {
         dialogsData: [
@@ -22,7 +21,8 @@
             { id: 6, message: 'Мама мыла раму' , messageOwner:'me'},
             { id: 7, message: 'Бык тупогуб тупогубенький бычек' },
             { id: 8, message: 'Картошка домашняя свежая очень вкусная' , messageOwner:'me'},
-          ]
+          ],
+        newMessageText : '',
     }
     
 
@@ -35,6 +35,12 @@
       messageOwner: 'me',
     }
     state.dialogsPage.messagesData.push(newMessage)
+    rerender(state)
+  }
+
+  export let characterDisplay = (messageSymbol) => {
+    state.dialogsPage.newMessageText = messageSymbol
+    console.log(messageSymbol)
   }
 
   export default state;
