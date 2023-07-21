@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -24,3 +25,10 @@ export let rerender = (state) => {
 rerender(store.getState());
 
 store.subscribe(rerender);
+=======
+import state from "./redux/state";
+import { rerender } from "./rerender";
+
+
+rerender(state)
+>>>>>>> refs/remotes/origin/dev

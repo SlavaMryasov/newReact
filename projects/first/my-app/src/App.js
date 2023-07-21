@@ -15,11 +15,19 @@ const App = (props) => {
         <div className='app-wrapper-content'>
           <Routes>
             <Route path="/profile" element={<Profile />} />
+<<<<<<< HEAD
             <Route path="/dialogs" element={<Dialogs
               dialogsPage={props.state.dialogsPage}
               addMessage={props.addMessage}
               newMessageText={props.newMessageText}
               characterDisplay={props.characterDisplay} />} />
+=======
+            <Route path="/dialogs" element={<Dialogs 
+             dialogsPage={props.state.dialogsPage}
+              addMessage={props.addMessage}
+              newMessageText = {props.newMessageText}
+              characterDisplay={props.characterDisplay}/>} />
+>>>>>>> refs/remotes/origin/dev
           </Routes>
         </div>
       </div>
