@@ -10,14 +10,20 @@ const Dialogs = (props) => {
 
   let dialogsPage = props.dialogsPage
   let dialogsElements = dialogsPage.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} />)
-let messagesElements = dialogsPage.messagesData.map(message => <Message id={message.id} message={message.message} messageOwner={message.messageOwner}/>)
+  let messagesElements = dialogsPage.messagesData.map(message => <Message id={message.id} message={message.message} messageOwner={message.messageOwner} />)
 
-let inputRef = React.createRef();
+  let inputRef = React.createRef();
 
-let sendMessage = ()=>{
-  let text = inputRef.current.value;
-  props.addMessage(text)
-}
+  let sendMessage = () => {
+    let text = inputRef.current.value;
+    props.addMessage(text)
+  }
+
+  let characterToState = () => {
+    let text = inputRef.current.value;
+    props.characterDisplay(text);
+  }
+
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogsItems}>
@@ -26,8 +32,8 @@ let sendMessage = ()=>{
       <div className={styles.messages}>
         {messagesElements}
         <div className={styles.newMessage}>
-        <input ref={inputRef}/>
-        <button onClick={sendMessage}>send</button>
+          <input onChange={characterToState} ref={inputRef} value={props.newMessageText} />
+          <button onClick={sendMessage}>send</button>
         </div>
       </div>
     </div>
