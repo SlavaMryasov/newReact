@@ -24,6 +24,21 @@ const Dialogs = (props) => {
     props.characterDisplay(text);
   }
 
+<<<<<<< HEAD
+=======
+let sendMessage = ()=>{
+  let text = inputRef.current.value;
+  props.addMessage(text)
+ 
+}
+
+let characterToState = () => {
+  let text = inputRef.current.value;
+  props.characterDisplay(text);
+  console.log(text)
+}
+
+>>>>>>> refs/remotes/origin/dev
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogsItems}>
@@ -32,8 +47,13 @@ const Dialogs = (props) => {
       <div className={styles.messages}>
         {messagesElements}
         <div className={styles.newMessage}>
+<<<<<<< HEAD
           <input onChange={characterToState} ref={inputRef} value={props.newMessageText} />
           <button onClick={sendMessage}>send</button>
+=======
+        <input onChange={characterToState} ref={inputRef}/>
+        <button  onClick={sendMessage}>send</button>
+>>>>>>> refs/remotes/origin/dev
         </div>
       </div>
     </div>
