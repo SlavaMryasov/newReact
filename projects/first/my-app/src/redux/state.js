@@ -35,22 +35,38 @@ export let store = {
   rerender() {
     console.log('blabla')
   },
-  addMessage(message) {
-    let newMessage = {
+  // addMessage(message) {
+  //   let newMessage = {
+  //     id: 9,
+  //     message: message,
+  //     messageOwner: 'me',
+  //   }
+  //   this._state.dialogsPage.messagesData.push(newMessage)
+  //   this.rerender(this._state)
+  // },
+  // updateNewMessageText(messageSymbol) {
+  //   this._state.dialogsPage.newMessageText = messageSymbol;
+  //   this.rerender(this._state);
+  // },
+  subscribe(observer) {
+    this.rerender = observer
+  },
+
+  dispatch(action){
+    if (action.type === 'ADD_MESSAGE'){
+      let newMessage = {
       id: 9,
-      message: message,
+      message: action.message,
       messageOwner: 'me',
     }
     this._state.dialogsPage.messagesData.push(newMessage)
     this.rerender(this._state)
-  },
-  characterDisplay(messageSymbol) {
-    this._state.dialogsPage.newMessageText = messageSymbol;
+    } else if(action.type === 'UPDATE_NEW_MESSAGE_TEXT'){
+      this._state.dialogsPage.newMessageText = action.messageSymbol;
     this.rerender(this._state);
-  },
-  subscribe(observer) {
-    this.rerender = observer
+    }
   }
+
 
 }
 

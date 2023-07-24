@@ -6,14 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { store } from './redux/state';
 
-export let rerender = (state) => {
-  const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+let rerender = (state) => {
+  
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App state={state} addMessage={store.addMessage.bind(store)}
+        <App state={state} dispatch={store.dispatch.bind(store)}
           newMessageText={store._state.dialogsPage.newMessageText}
-          characterDisplay={store.characterDisplay.bind(store)} />
+           />
       </BrowserRouter>
     </React.StrictMode>
   );

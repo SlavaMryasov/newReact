@@ -4,7 +4,8 @@ import Message from './Message/Message';
 import React from 'react';
 
 
-
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
 
 const Dialogs = (props) => {
 
@@ -16,12 +17,12 @@ const Dialogs = (props) => {
 
   let sendMessage = () => {
     let text = inputRef.current.value;
-    props.addMessage(text)
+    props.dispatch({type: ADD_MESSAGE, message: text})
   }
 
   let characterToState = () => {
     let text = inputRef.current.value;
-    props.characterDisplay(text);
+    props.dispatch({type: UPDATE_NEW_MESSAGE_TEXT, messageSymbol: text});
   }
 
   return (
