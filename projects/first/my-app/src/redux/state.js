@@ -1,3 +1,7 @@
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+
+
 export let store = {
   _state: {
     dialogsPage: {
@@ -52,24 +56,33 @@ export let store = {
     this.rerender = observer
   },
 
-  dispatch(action){
-    if (action.type === 'ADD_MESSAGE'){
+  dispatch(action) {
+    if (action.type === 'ADD_MESSAGE') {
       let newMessage = {
-      id: 9,
-      message: action.message,
-      messageOwner: 'me',
-    }
-    this._state.dialogsPage.messagesData.push(newMessage)
-    this.rerender(this._state)
-    } else if(action.type === 'UPDATE_NEW_MESSAGE_TEXT'){
+        id: 9,
+        message: action.message,
+        messageOwner: 'me',
+      }
+      this._state.dialogsPage.messagesData.push(newMessage)
+      this.rerender(this._state)
+    } else if (action.type === 'UPDATE_NEW_MESSAGE_TEXT') {
       this._state.dialogsPage.newMessageText = action.messageSymbol;
-    this.rerender(this._state);
+      this.rerender(this._state);
     }
   }
 
 
 }
 
+export const sendMessageAcionCreator = (text) => ({
+  type: ADD_MESSAGE,
+  message: text,
+});
+
+export const characterToStateActionCreator = (text) => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
+  messageSymbol: text,
+})
 
 store._state.dialogsPage.sayNames()
 

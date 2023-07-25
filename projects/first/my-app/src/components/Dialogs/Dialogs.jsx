@@ -2,27 +2,26 @@ import styles from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import React from 'react';
+import { characterToStateActionCreator, sendMessageAcionCreator } from '../../redux/state';
 
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
-const ADD_MESSAGE = 'ADD_MESSAGE';
+
 
 const Dialogs = (props) => {
-
   let dialogsPage = props.dialogsPage
   let dialogsElements = dialogsPage.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} />)
   let messagesElements = dialogsPage.messagesData.map(message => <Message id={message.id} message={message.message} messageOwner={message.messageOwner} />)
 
-  let inputRef = React.createRef();
 
-  let sendMessage = () => {
-    let text = inputRef.current.value;
-    props.dispatch({type: ADD_MESSAGE, message: text})
+
+  let sendMessage = (event) => {
+    let text = event.target.value
+    props.dispatch(sendMessageAcionCreator(text))
   }
 
-  let characterToState = () => {
-    let text = inputRef.current.value;
-    props.dispatch({type: UPDATE_NEW_MESSAGE_TEXT, messageSymbol: text});
+  let characterToState = (event) => {
+    let text = event.target.value
+    props.dispatch(characterToStateActionCreator(text));
   }
 
   return (
@@ -33,12 +32,13 @@ const Dialogs = (props) => {
       <div className={styles.messages}>
         {messagesElements}
         <div className={styles.newMessage}>
-          <input onChange={characterToState} ref={inputRef} value={props.newMessageText} />
-          <button onClick={sendMessage}>send</button>
+          <input onChange={characterToState} value={props.newMessageText} />
+          <button onClick={sendMessage} value={props.newMessageText} >send</button>
         </div>
       </div>
     </div>
   )
+
 }
 
 
