@@ -1,3 +1,5 @@
+import dialogsReducer from "./dialogsReducer";
+
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 const ADD_MESSAGE = 'ADD_MESSAGE';
 
@@ -39,50 +41,19 @@ export let store = {
   rerender() {
     console.log('blabla')
   },
-  // addMessage(message) {
-  //   let newMessage = {
-  //     id: 9,
-  //     message: message,
-  //     messageOwner: 'me',
-  //   }
-  //   this._state.dialogsPage.messagesData.push(newMessage)
-  //   this.rerender(this._state)
-  // },
-  // updateNewMessageText(messageSymbol) {
-  //   this._state.dialogsPage.newMessageText = messageSymbol;
-  //   this.rerender(this._state);
-  // },
+
   subscribe(observer) {
     this.rerender = observer
   },
 
   dispatch(action) {
-    if (action.type === 'ADD_MESSAGE') {
-      let newMessage = {
-        id: 9,
-        message: action.message,
-        messageOwner: 'me',
-      }
-      this._state.dialogsPage.messagesData.push(newMessage)
-      this.rerender(this._state)
-    } else if (action.type === 'UPDATE_NEW_MESSAGE_TEXT') {
-      this._state.dialogsPage.newMessageText = action.messageSymbol;
-      this.rerender(this._state);
-    }
+    dialogsReducer(this._state.dialogsPage, action)
+    this.rerender(this._state);
   }
 
 
 }
 
-export const sendMessageAcionCreator = (text) => ({
-  type: ADD_MESSAGE,
-  message: text,
-});
-
-export const characterToStateActionCreator = (text) => ({
-  type: UPDATE_NEW_MESSAGE_TEXT,
-  messageSymbol: text,
-})
 
 store._state.dialogsPage.sayNames()
 
