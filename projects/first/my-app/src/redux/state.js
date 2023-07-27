@@ -57,4 +57,4 @@ export let store = {
 
 store._state.dialogsPage.sayNames()
 
-export default store;
+// export default store;
