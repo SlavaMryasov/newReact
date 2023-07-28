@@ -16,12 +16,12 @@ const Dialogs = (props) => {
 
   let sendMessage = (event) => {
     let text = event.target.value
-    props.dispatch(sendMessageAcionCreator(text))
+    props.sendMessageInContainer(text)
   }
 
   let characterToState = (event) => {
     let text = event.target.value
-    props.dispatch(characterToStateActionCreator(text));
+    props.characterToStateInContainer(text)
   }
 
   return (
