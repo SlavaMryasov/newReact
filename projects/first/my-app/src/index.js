@@ -5,25 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import store from './redux/reduxStore';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let rerender = (state) => {
-  root.render(
-    <React.StrictMode>
-      <BrowserRouter>
-        <App state={state} dispatch={store.dispatch.bind(store)}
-          newMessageText={state.dialogsPage.newMessageText}
-        />
-      </BrowserRouter>
-    </React.StrictMode>
-  );
 
-  reportWebVitals();
-}
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
 
-rerender(store.getState());
+reportWebVitals();
 
-store.subscribe(() => {
-  let state = store.getState()
-  rerender(state)
-});
+

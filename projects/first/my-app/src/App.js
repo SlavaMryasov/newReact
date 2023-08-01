@@ -6,7 +6,6 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { Routes, Route } from "react-router-dom";
 
 const App = (props) => {
-
   return (
 
     <div className="modules">
@@ -16,11 +15,7 @@ const App = (props) => {
         <div className='app-wrapper-content'>
           <Routes>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/dialogs" element={<DialogsContainer
-              dialogsPage={props.state.dialogsPage}
-              newMessageText={props.newMessageText}
-              dispatch={props.dispatch}
-            />} />
+            <Route path="/dialogs" element={<DialogsContainer />} />
           </Routes>
         </div>
       </div>
