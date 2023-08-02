@@ -1,6 +1,6 @@
-import styles from './User.module.css'
+import styles from './MyProfile.module.css'
 
-const User = () => {
+const MyProfile = () => {
   return (
     <div className={styles.user}>
       <div className={styles.avatar}>
@@ -13,4 +13,4 @@ const User = () => {
   )
 }
 
-export default User;
+export default MyProfile;
