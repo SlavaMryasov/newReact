@@ -6,17 +6,19 @@ import Users from './Users';
 
 const mapStateToProps = (state) => {
   return {
-    dialogsPage: state.dialogsPage,
+    usersPage: state.usersPage,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     follow: (text) => {
-      dispatch(followAC(text))
+      console.log(text)
+      dispatch(unFollowAC(text))
     },
     unfollow: (text) => {
-      dispatch(unFollowAC(text))
+      console.log(text)
+      dispatch(followAC(text))
     }
   }
 }
