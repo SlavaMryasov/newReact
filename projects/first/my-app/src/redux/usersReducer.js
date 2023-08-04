@@ -17,25 +17,25 @@ const usersReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        followed: { ...state.users.map(user => user.followed = false) }
+        followed: { ...state.users.map(user => String(user.id) === action.userId ? user.followed = false :user.followed) }
         // users: [...state.users.map(user => user.followed = false)]
       }
     case UNFOLLOW:
       return {
         ...state,
-        followed: { ...state.users.map(user => user.followed = true) }
+        followed: { ...state.users.map(user => String(user.id) === action.userId ? user.followed = true :user.followed)  }
         // users: [...state.users.map(user => user.followed = true)]
       }
     default: return state
   }
 }
 
-export const followAC = (text) => ({
-  type: UNFOLLOW, text
+export const followAC = (userId) => ({
+  type: UNFOLLOW, userId
 })
 
-export const unFollowAC = (text) => ({
-  type: FOLLOW, text
+export const unFollowAC = (userId) => ({
+  type: FOLLOW, userId
 })
 
 export default usersReducer;

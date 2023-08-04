@@ -1,29 +1,26 @@
 import styles from './Users.module.css'
 
 const Users = (props) => {
-  let st = props.usersPage.users.map(user => user.name)
-  let changeStatus = (event) => {
-    let text = event.target.value
-    console.log(text)
-    if (text === false) {
-      props.unfollow(text)
-    }
-    else {
-      props.follow(text)
-    }
 
+  let changeStatus = (event) =>{
+    let status = event.target.value;
+    let userId = event.target.id;
+
+    if(status === 'true'){
+      props.follow(userId)
+      
+    }
+    else if(status === 'false'){
+      props.unfollow(userId)
+      
+    }
+    
   }
-  return (
-    <div>
-      {
-        props.usersPage.users.map(user =>
-          <div className={styles.users}>< button onClick={changeStatus} value={user.followed} >{user.followed === true ? 'follow' : 'unfollow'}</button><div>{user.name}</div></div>
-
-        )
-
-      }
-
-    </div >
+  let users = props.usersPage.users.map(user => <div key={user.id}><button id={user.id} 
+    onClick={changeStatus} value={user.followed}>{user.followed === true ? 'follow' : 'unfollow'}</button>{user.name}</div>)
+ 
+  return(
+    <div>{users}</div>
   )
 }
 
