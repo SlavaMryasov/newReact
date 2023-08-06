@@ -1,27 +1,44 @@
 import styles from './Users.module.css'
-
+import me from './Untitled.png'
+import axios from 'axios'
 const Users = (props) => {
 
-  let changeStatus = (event) =>{
-    let status = event.target.value;
-    let userId = event.target.id;
+  if(props.users.length === 0) {
 
-    if(status === 'true'){
-      props.follow(userId)
-      
-    }
-    else if(status === 'false'){
-      props.unfollow(userId)
-      
-    }
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+     
+      props.setUsers(response.data.items) 
+    });
+
     
   }
-  let users = props.usersPage.users.map(user => <div key={user.id}><button id={user.id} 
-    onClick={changeStatus} value={user.followed}>{user.followed === true ? 'follow' : 'unfollow'}</button>{user.name}</div>)
- 
-  return(
-    <div>{users}</div>
-  )
-}
 
+  return <div>
+    {
+      props.users.map (user => <div key={user.id}>
+        <div >
+          <div>
+            <img src={user.photos.small !== null ? user.photos.small : me}  className={styles.img}/>
+          </div>
+          <span>
+            {user.followed 
+            ? <button onClick={()=>{props.unfollow(user.id)}}>UnFollow</button>
+            :<button onClick={()=>{props.follow(user.id)}}>Follow</button>}
+            
+          </span>
+        </div>
+        <div>
+          <span>
+            <div>{user.name}</div>
+            <div>{user.status}</div>
+          </span>
+          <span>
+            <span>{'user.location.country'} </span>
+            <span>{'user.location.city'}</span>
+          </span>
+        </div>
+      </div>)
+    }
+  </div>
+}
 export default Users;
