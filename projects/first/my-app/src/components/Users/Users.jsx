@@ -3,28 +3,34 @@ import me from './Untitled.png'
 import axios from 'axios'
 const Users = (props) => {
 
-  if(props.users.length === 0) {
 
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-     
-      props.setUsers(response.data.items) 
-    });
 
-    
+  let getUsers = () => {
+    if (props.users.length === 0) {
+
+      axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+
+        props.setUsers(response.data.items)
+      });
+    }
+
+
+
   }
 
   return <div>
+    <button onClick={getUsers}>Get users</button>
     {
-      props.users.map (user => <div key={user.id}>
+      props.users.map(user => <div key={user.id}>
         <div >
           <div>
-            <img src={user.photos.small !== null ? user.photos.small : me}  className={styles.img}/>
+            <img src={user.photos.small !== null ? user.photos.small : me} className={styles.img} />
           </div>
           <span>
-            {user.followed 
-            ? <button onClick={()=>{props.unfollow(user.id)}}>UnFollow</button>
-            :<button onClick={()=>{props.follow(user.id)}}>Follow</button>}
-            
+            {user.followed
+              ? <button onClick={() => { props.unfollow(user.id) }}>UnFollow</button>
+              : <button onClick={() => { props.follow(user.id) }}>Follow</button>}
+
           </span>
         </div>
         <div>
