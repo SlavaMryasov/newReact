@@ -1,26 +1,29 @@
 import me from './Untitled.png'
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLOWW';
-const SET_USERS ='SET_USERS';
+const SET_USERS = 'SET_USERS';
 
 
 let initialStore = {
-  users: [ ]
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 200,
 }
 
 const usersReducer = (state = initialStore, action) => {
   switch (action.type) {
-    case FOLLOW:{
+    case FOLLOW: {
       return {
         ...state,
-         users: state.users.map(user => {
+        users: state.users.map(user => {
           if (user.id === action.userId) {
             return { ...user, followed: true }
           }
           return user;
         })
-      }}
-    case UNFOLLOW:{
+      }
+    }
+    case UNFOLLOW: {
       return {
         ...state, users: state.users.map(user => {
           if (user.id === action.userId) {
@@ -28,13 +31,15 @@ const usersReducer = (state = initialStore, action) => {
           }
           return user;
         })
-      }}
-    case SET_USERS:{
-      return{
-        ...state, users: [ ...action.users]}
       }
-      
-      default: return state
+    }
+    case SET_USERS: {
+      return {
+        ...state, users: [...action.users]
+      }
+    }
+
+    default: return state
   }
 }
 
@@ -48,7 +53,7 @@ export const followAC = (userId) => ({
 export const unfollowAC = (userId) => ({
   type: UNFOLLOW, userId
 })
-export const setUsersAC =(users) =>({
+export const setUsersAC = (users) => ({
   type: SET_USERS, users
 })
 

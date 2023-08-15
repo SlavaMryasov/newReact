@@ -7,24 +7,35 @@ class Users extends React.Component {
   // constructor(props){ Конструктор можно не писать, если передаются только пропсы, реакт сделает это автоматом
   //   super(props);
   // }
-  componentDidMount(){
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-    this.props.setUsers(response.data.items) 
-  });
+  //?page=1&&pageSize=3
+  componentDidMount() {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users?page=33&count=5').then(response => {
+      this.props.setUsers(response.data.items)
+    });
   }
-    render(){ // рендер обязательно есть у классовой компоненты
-      return <div>
+  render() { // рендер обязательно есть у классовой компоненты
+
+    let pagesCount = this.props.totalUsersCount / this.props.pageSize;
+
+    let pages = [];
+    for (let i = 0; i < pagesCount; i++) {
+      pages.push(i)
+    }
+
+
+    return <div>
+      <div >{pages.map(page => <span className={this.props.currentPage === page ? styles.unselectedPage : styles.selectedPage}>{page}</span>)}</div>
       {
-        this.props.users.map (user => <div key={user.id}>
+        this.props.users.map(user => <div key={user.id}>
           <div >
             <div>
-              <img src={user.photos.small !== null ? user.photos.small : me}  className={styles.img}/>
+              <img src={user.photos.small !== null ? user.photos.small : me} className={styles.img} />
             </div>
             <span>
-              {user.followed 
-              ? <button onClick={()=>{this.props.unfollow(user.id)}}>UnFollow</button>
-              :<button onClick={()=>{this.props.follow(user.id)}}>Follow</button>}
-              
+              {user.followed
+                ? <button onClick={() => { this.props.unfollow(user.id) }}>UnFollow</button>
+                : <button onClick={() => { this.props.follow(user.id) }}>Follow</button>}
+
             </span>
           </div>
           <div>
@@ -40,8 +51,8 @@ class Users extends React.Component {
         </div>)
       }
     </div>
-    }
-  
+  }
+
 }
 
 export default Users;

@@ -6,19 +6,22 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
 const mapDispatchToProps = (dispatch) => {//state взяли из store в котором лежит и state и dispatch
     return {
-        follow: (userId)=>{
+        follow: (userId) => {
             dispatch(followAC(userId));
         },
-        unfollow: (userId)=>{
+        unfollow: (userId) => {
             dispatch(unfollowAC(userId));
         },
-        setUsers: (users)=>{
+        setUsers: (users) => {
             dispatch(setUsersAC(users));
         }
     }
@@ -26,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {//state взяли из store в ко�
 
 
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users) 
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
 
 
 export default UsersContainer;
