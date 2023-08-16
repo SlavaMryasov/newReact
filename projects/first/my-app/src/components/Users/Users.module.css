@@ -15,3 +15,8 @@
 button {
   box-sizing: content-box;
 }
+
+.boxForPages {
+  width: 5vw;
+  overflow: hidden;
+}
