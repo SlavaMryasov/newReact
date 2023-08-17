@@ -1,39 +1,25 @@
 import styles from './Users.module.css'
 import me from './Untitled.png'
-import axios from 'axios'
 import React from 'react'
+import axios from 'axios'
 
 class Users extends React.Component {
-  // constructor(props){ Конструктор можно не писать, если передаются только пропсы, реакт сделает это автоматом
-  //   super(props);
-  // }
-  //?page=1&&pageSize=3
   componentDidMount() {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-      this.props.setUsers(response.data.items)
-      this.props.setTotalUsersCount(response.data.totalCount)
-    });
-
-  }
-  onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users?page=8&count=24').then(response => {
       this.props.setUsers(response.data.items);
-
-    });
+      this.props.setTotalUsersCount(response.data.totalCount);
+    })
   }
-  render() { // рендер обязательно есть у классовой компоненты
+  pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
 
-    let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
 
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i)
+  render() {
+    for (let i = 1; i <= this.pageCount; i++) {
+      this.props.currentPage.push(i)
     }
-
-
-
     return <div>
+      <div>{this.props.currentPage.map(page => <span>page</span>)}</div>
+      <div className={styles.boxForPages}>{this.props.pages}</div>
       {
         this.props.users.map(user => <div key={user.id}>
           <div >
@@ -59,10 +45,7 @@ class Users extends React.Component {
           </div>
         </div>)
       }
-      {/* <input type="range" > */}
-      <div className={styles.boxForPages}>{pages.map(page => <span className={this.props.currentPage === page ?
-        styles.selectedPage : styles.unselectedPage} onClick={(event) => { this.onPageChanged(page) }}>{page}</span>)}</div>
-      {/* </input> */}
+
     </div>
   }
 
