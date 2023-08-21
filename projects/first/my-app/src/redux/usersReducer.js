@@ -1,13 +1,13 @@
-import me from './Untitled.png'
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLOWW';
 const SET_USERS = 'SET_USERS';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
+const CHANGE_PAGE = 'CHANGE_PAGE';
 
 let initialStore = {
   users: [],
   totalUsersCount: 0,
-  currentPage: 9,
+  currentPage: 1,
   pageSize: 5
 }
 
@@ -46,6 +46,12 @@ const usersReducer = (state = initialStore, action) => {
       }
     }
 
+    case CHANGE_PAGE : {
+      return{
+        ...state, currentPage: action.currentPage
+      }
+    }
+
     default: return state
   }
 }
@@ -65,6 +71,9 @@ export const setUsersAC = (users) => ({
 })
 export const setUsersTotalCountAC = (usersCount) => ({
   type: SET_USERS_TOTAL_COUNT, totalUsersCount: usersCount
+})
+export const changePageAC = (currentPage) => ({
+  type: CHANGE_PAGE, currentPage
 })
 
 

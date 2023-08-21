@@ -1,4 +1,4 @@
-import { followAC, setUsersAC, unfollowAC, setUsersTotalCountAC } from '../../redux/usersReducer';
+import { followAC, setUsersAC, unfollowAC, setUsersTotalCountAC, changePageAC } from '../../redux/usersReducer';
 import Users from './Users'
 import { connect } from 'react-redux';
 
@@ -26,6 +26,9 @@ const mapDispatchToProps = (dispatch) => {//state взяли из store в ко�
         },
         setTotalUsersCount: (usersCount) => {
             dispatch(setUsersTotalCountAC(usersCount));
+        },
+        changePage: (pageNumber) => {
+            dispatch(changePageAC(pageNumber));
         }
     }
 }

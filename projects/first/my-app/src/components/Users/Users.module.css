@@ -1,3 +1,4 @@
+
 .img {
   width: 100px;
 }
@@ -17,6 +18,8 @@ button {
 }
 
 .boxForPages {
+  margin-top: 2%;
   width: 5vw;
-  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y:hidden ;
 }
