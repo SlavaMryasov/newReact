@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLOWW';
 const SET_USERS = 'SET_USERS';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const CHANGE_PAGE = 'CHANGE_PAGE';
+const CHANGE_STATUS = 'CHANGE_STATUS';
 
 let initialStore = {
   users: [],
   totalUsersCount: 0,
   currentPage: 1,
-  pageSize: 5
+  pageSize: 5,
+  pending: false
 }
 
 const usersReducer = (state = initialStore, action) => {
@@ -46,9 +48,15 @@ const usersReducer = (state = initialStore, action) => {
       }
     }
 
-    case CHANGE_PAGE : {
-      return{
+    case CHANGE_PAGE: {
+      return {
         ...state, currentPage: action.currentPage
+      }
+    }
+
+    case CHANGE_STATUS: {
+      return {
+        ...state, pending: action.pending
       }
     }
 
@@ -74,6 +82,9 @@ export const setUsersTotalCountAC = (usersCount) => ({
 })
 export const changePageAC = (currentPage) => ({
   type: CHANGE_PAGE, currentPage
+})
+export const changeStatusAC = (pending) => ({
+  type: CHANGE_STATUS, pending
 })
 
 

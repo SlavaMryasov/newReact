@@ -1,5 +1,6 @@
 import styles from './Users.module.css'
 import me from './Untitled.png'
+import Loader from '../presets/Loader'
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -8,7 +9,9 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)
   }
+
   return <div>
+    {props.pending === true ? <Loader /> : null}
     {
       props.users.map(user => <div key={user.id}>
         <div >
