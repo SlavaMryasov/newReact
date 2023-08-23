@@ -1,4 +1,4 @@
-import { followAC, setUsersAC, unfollowAC, setUsersTotalCountAC, changePageAC, changeStatusAC } from '../../redux/usersReducer';
+import { follow, setUsers, unfollow, setUsersTotalCount, changePage, changeStatus } from '../../redux/usersReducer';
 import { connect } from 'react-redux';
 import React from 'react'
 import axios from 'axios'
@@ -9,7 +9,7 @@ class UsersContainer extends React.Component {
         this.props.changeStatus(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
+            this.props.setUsersTotalCount(response.data.totalCount);
             this.props.changeStatus(false)
         })
 
@@ -48,31 +48,31 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {//state взяли из store в котором лежит и state и dispatch
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setTotalUsersCount: (usersCount) => {
-            dispatch(setUsersTotalCountAC(usersCount));
-        },
-        changePage: (pageNumber) => {
-            dispatch(changePageAC(pageNumber));
-        },
-        changeStatus: (status) => {
-            dispatch(changeStatusAC(status))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {//state взяли из store в котором лежит и state и dispatch
+//     return {
+//         follow: (userId) => {
+//             dispatch(followAC(userId));
+//         },
+//         unfollow: (userId) => {
+//             dispatch(unfollowAC(userId));
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users));
+//         },
+//         setTotalUsersCount: (usersCount) => {
+//             dispatch(setUsersTotalCountAC(usersCount));
+//         },
+//         changePage: (pageNumber) => {
+//             dispatch(changePageAC(pageNumber));
+//         },
+//         changeStatus: (status) => {
+//             dispatch(changeStatusAC(status))
+//         }
+//     }
+// }
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setUsers, setUsersTotalCount, changePage, changeStatus})(UsersContainer);
 
 
