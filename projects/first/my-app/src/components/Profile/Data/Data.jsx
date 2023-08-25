@@ -2,7 +2,8 @@ import styles from './Data.module.css'
 import Posts from './Posts/Posts';
 import MyProfile from './MyProfile/MyProfile';
 
-const Data = () => {
+const Data = (props) => {
+  
   return (
     <div>
       <div className={styles.img}>

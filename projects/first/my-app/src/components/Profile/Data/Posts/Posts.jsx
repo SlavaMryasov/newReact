@@ -8,7 +8,7 @@ let postsData = [
   {id:3, message: 'shikaka!', likesCount: 5},
 ]
 
-let postsElement = postsData.map(post => <Post message={post.message}/>)
+let postsElement = postsData.map(post => <Post message={post.message} key={post.id}/>)
 
 const Posts = () => {
   return (

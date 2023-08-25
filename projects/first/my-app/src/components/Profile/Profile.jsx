@@ -1,10 +1,10 @@
 import styles from './Profile.module.css'
-import Data from './Data/Data';
+import DataContainer from './Data/DataContainer';
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div className={styles.content}>
-      <Data />
+      <DataContainer {...props} />
     </div>
   )
 }
