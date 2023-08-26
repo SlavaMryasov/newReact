@@ -9,12 +9,13 @@ class DataContainer extends React.Component {
   componentDidMount() {
     axios.get('https://social-network.samuraijs.com/api/1.0/profile/2').then(response => {
       this.props.setUser(response.data);
+      console.log(response.data)
     })
   }
 
   render() {
     return (
-      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} />
+      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos}/>
     )
   }
 
@@ -23,7 +24,8 @@ class DataContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     aboutMe: state.profilePage.aboutMe,
-    fullName: state.profilePage.aboutMe
+    fullName: state.profilePage.fullName,
+    photos: state.profilePage.photos
   }
 }
 
