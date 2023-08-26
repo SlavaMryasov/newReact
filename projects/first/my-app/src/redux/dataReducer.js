@@ -3,15 +3,16 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 
 let initialStore = {
-
+  aboutMe: 'I am banana',
+  fullName: 'Slava Mryasov',
 }
 
 const dataReducer = (state = initialStore, action) => {
   switch (action.type) {
-    
+
     case SET_USER_PROFILE: {
       return {
-        ...state, users: action.user
+        ...state, aboutMe: action.user.aboutMe
       }
     }
     default: return state

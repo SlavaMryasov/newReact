@@ -1,22 +1,31 @@
 import React from 'react';
 import Data from './Data';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setUser } from './../../../redux/dataReducer'
 
 class DataContainer extends React.Component {
- 
-  componentDidMount(){
-    axios.get('https://social-network.samuraijs.com/api/1.0/profile/2').then(response =>{
-      console.log(response.data.photos)
-      
+
+  componentDidMount() {
+    axios.get('https://social-network.samuraijs.com/api/1.0/profile/2').then(response => {
+      this.props.setUser(response.data);
     })
   }
 
-  render(){
+  render() {
     return (
-      <Data />
+      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} />
     )
   }
- 
+
 }
 
-export default DataContainer;
+const mapStateToProps = (state) => {
+  return {
+    aboutMe: state.profilePage.aboutMe,
+    fullName: state.profilePage.aboutMe
+  }
+}
+
+
+export default connect(mapStateToProps, { setUser })(DataContainer);
