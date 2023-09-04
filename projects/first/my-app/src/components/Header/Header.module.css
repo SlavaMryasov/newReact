@@ -9,3 +9,7 @@
   grid-area: h;
   background-color: rgb(167, 167, 167);
 }
+
+.authBlock {
+  float: right
+}

@@ -3,11 +3,28 @@ import Data from './Data';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setUser } from './../../../redux/dataReducer'
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return (
+      <Component
+        {...props}
+        router={{ location, navigate, params }}
+      />
+    )
+  }
+  return ComponentWithRouterProp;
+}
 
 class DataContainer extends React.Component {
 
   componentDidMount() {
-    axios.get('https://social-network.samuraijs.com/api/1.0/profile/2').then(response => {
+    let userId = this.props.router.params.userId
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
       this.props.setUser(response.data);
       console.log(response.data)
     })
@@ -15,7 +32,7 @@ class DataContainer extends React.Component {
 
   render() {
     return (
-      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos}/>
+      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos} />
     )
   }
 
@@ -30,4 +47,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { setUser })(DataContainer);
+export default connect(mapStateToProps, { setUser })(withRouter(DataContainer));
