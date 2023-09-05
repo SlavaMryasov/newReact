@@ -2,8 +2,8 @@ const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 
 let initialState = {
   id: null,
-  email: null,
   login: null,
+  email: null,
   isAuth: false
 }
 
@@ -12,7 +12,8 @@ const authReducer = (state = initialState, action) => {
     case SET_AUTH_USER_DATA: {
       return {
         ...state,
-        ...action.data
+        ...action.data, // в экшене создаем объект дата, сюда закинем id email login
+        isAuth: true
       }
     }
     default: return state
