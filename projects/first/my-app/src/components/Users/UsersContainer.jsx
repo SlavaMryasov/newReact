@@ -7,7 +7,8 @@ import Users from './Users';
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.changeStatus(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+        {withCredentials:true}).then(response => {
             this.props.setUsers(response.data.items);
             this.props.setUsersTotalCount(response.data.totalCount);
             this.props.changeStatus(false)
@@ -17,7 +18,9 @@ class UsersContainer extends React.Component {
     onChangePage = (page) => {
         this.props.changeStatus(true)
         this.props.changePage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+        {withCredentials:true}
+        ).then(response => {
             this.props.setUsers(response.data.items);
             this.props.changeStatus(false)
         })

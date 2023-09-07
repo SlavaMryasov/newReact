@@ -2,6 +2,7 @@ import styles from './Users.module.css'
 import me from './Untitled.png'
 import Loader from '../presets/Loader'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -10,7 +11,6 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)
   }
-
   return <div>
     {props.pending === true ? <Loader /> : null}
     {
@@ -23,8 +23,28 @@ let Users = (props) => {
           </div>
           <span>
             {user.followed
-              ? <button onClick={() => { props.unfollow(user.id) }}>UnFollow</button>
-              : <button onClick={() => { props.follow(user.id) }}>Follow</button>}
+              ? <button onClick={() => { 
+                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                 {withCredentials: true, 'API-KEY': 'ce79cb97-503f-47ad-acea-165cf07d55d2'})
+                .then(response =>{
+                  if(response.data.resultCode === 0){
+                    props.unfollow(user.id) 
+                  }
+                })
+                
+              }}>UnFollow</button>
+              : <button onClick={() => {
+                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
+                 {withCredentials: true, 'API-KEY': 'ce79cb97-503f-47ad-acea-165cf07d55d2'})
+                .then(response =>{
+                  if(response.data.resultCode === 0){
+                    props.follow(user.id) 
+                  
+                  }
+                })
+                
+
+                 }}>Follow</button>}
           </span>
         </div>
         <div>
