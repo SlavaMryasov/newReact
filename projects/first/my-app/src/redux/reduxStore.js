@@ -1,4 +1,5 @@
 import { combineReducers, legacy_createStore } from "redux";
+import authReducer from "./authReducer";
 import dataReducer from "./dataReducer";
 import dialogsReducer from "./dialogsReducer";
 import usersReducer from "./usersReducer";
