@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import React from 'react'
 import axios from 'axios'
 import Users from './Users';
+import { usersRequest } from '../../api/api';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.changeStatus(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-        {withCredentials:true}).then(response => {
-            this.props.setUsers(response.data.items);
-            this.props.setUsersTotalCount(response.data.totalCount);
+        usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
+            this.props.setUsers(data.items);
+            this.props.setUsersTotalCount(data.totalCount);
             this.props.changeStatus(false)
         })
 
@@ -18,10 +18,8 @@ class UsersContainer extends React.Component {
     onChangePage = (page) => {
         this.props.changeStatus(true)
         this.props.changePage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
-        {withCredentials:true}
-        ).then(response => {
-            this.props.setUsers(response.data.items);
+        usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
+            this.props.setUsers(data.items);
             this.props.changeStatus(false)
         })
 

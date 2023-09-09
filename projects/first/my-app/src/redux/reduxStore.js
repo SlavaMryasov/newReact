@@ -3,7 +3,6 @@ import authReducer from "./authReducer";
 import dataReducer from "./dataReducer";
 import dialogsReducer from "./dialogsReducer";
 import usersReducer from "./usersReducer";
-import authReducer from "./authReducer";
 
 let reducers = combineReducers({
   dialogsPage: dialogsReducer,
