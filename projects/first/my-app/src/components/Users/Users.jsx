@@ -1,9 +1,9 @@
+
 import styles from './Users.module.css'
 import me from './Untitled.png'
 import Loader from '../presets/Loader'
 import { NavLink } from 'react-router-dom'
 import { followRequest, unfollowRequest } from '../../api/api'
-import { toHaveFormValues } from '@testing-library/jest-dom/matchers'
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -66,3 +66,6 @@ let Users = (props) => {
 }
 
 export default Users;
+
+
+
