@@ -1,3 +1,4 @@
+
 import { follow, setUsers, unfollow, setUsersTotalCount, changePage, changeStatus, changeStatusRequest } from '../../redux/usersReducer';
 import { connect } from 'react-redux';
 import React from 'react'
@@ -77,3 +78,11 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, { follow, unfollow, setUsers, setUsers, setUsersTotalCount, changePage, changeStatus, changeStatusRequest })(UsersContainer);
+
+
+
+
+
+
+
+
