@@ -1,7 +1,6 @@
-import { follow, setUsers, unfollow, setUsersTotalCount, changePage, changeStatus } from '../../redux/usersReducer';
+import { follow, setUsers, unfollow, setUsersTotalCount, changePage, changeStatus, changeStatusRequest } from '../../redux/usersReducer';
 import { connect } from 'react-redux';
 import React from 'react'
-import axios from 'axios'
 import Users from './Users';
 import { usersRequest } from '../../api/api';
 
@@ -33,7 +32,9 @@ class UsersContainer extends React.Component {
             users={this.props.users}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
-            pending={this.props.pending} />
+            pending={this.props.pending}
+            requestIsActive={this.props.requestIsActive}
+            changeStatusRequest={this.props.changeStatusRequest} />
     }
 
 }
@@ -45,7 +46,8 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        pending: state.usersPage.pending
+        pending: state.usersPage.pending,
+        requestIsActive: state.usersPage.requestIsActive
     }
 }
 
@@ -74,6 +76,6 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, {follow, unfollow, setUsers, setUsers, setUsersTotalCount, changePage, changeStatus})(UsersContainer);
+export default connect(mapStateToProps, { follow, unfollow, setUsers, setUsers, setUsersTotalCount, changePage, changeStatus, changeStatusRequest })(UsersContainer);
 
 

@@ -19,27 +19,31 @@ let Users = (props) => {
           <div>
             <NavLink to={'/profile/' + user.id}>
               <img src={user.photos.small !== null ? user.photos.small : me} className={styles.img} />
-              </NavLink>
+            </NavLink>
           </div>
           <span>
             {user.followed
-              ? <button onClick={() => { 
-                unfollowRequest(user.id).then(data =>{
-                  if(data.resultCode === 0){
-                    props.unfollow(user.id) 
+              ? <button onClick={() => {
+                console.log(props.requestIsActive, 'dddd')
+                props.changeStatusRequest(true, user.id)
+                unfollowRequest(user.id).then(data => {
+                  if (data.resultCode === 0) {
+                    props.unfollow(user.id)
                   }
                 })
-                
+                props.changeStatusRequest(false, user.id)
               }}>UnFollow</button>
               : <button onClick={() => {
-                followRequest(user.id).then(data =>{
-                  if(data.resultCode === 0){
-                    props.follow(user.id) 
-                  
+                console.log(props.requestIsActive, 'dddd')
+                props.changeStatusRequest(true, user.id)
+                followRequest(user.id).then(data => {
+                  if (data.resultCode === 0) {
+                    props.follow(user.id)
                   }
+                  props.changeStatusRequest(false, user.id)
                 })
-                
-                 }}>Follow</button>}
+
+              }}>Follow</button>}
           </span>
         </div>
         <div>
