@@ -4,13 +4,15 @@ const SET_USERS = 'SET_USERS';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const CHANGE_PAGE = 'CHANGE_PAGE';
 const CHANGE_STATUS = 'CHANGE_STATUS';
+const CHANGE_STATUS_REQUEST = 'CHANGE_STATUS_REQUEST';
 
 let initialStore = {
   users: [],
   totalUsersCount: 0,
   currentPage: 1,
   pageSize: 5,
-  pending: false
+  pending: false,
+  requestIsActive:[]
 }
 
 const usersReducer = (state = initialStore, action) => {
@@ -59,6 +61,12 @@ const usersReducer = (state = initialStore, action) => {
         ...state, pending: action.pending
       }
     }
+    case CHANGE_STATUS_REQUEST: {
+      console.log(action)
+      return {
+        ...state, requestIsActive: action.requestIsActive
+      }
+    }
 
     default: return state
   }
@@ -85,6 +93,9 @@ export const changePage = (currentPage) => ({
 })
 export const changeStatus = (pending) => ({
   type: CHANGE_STATUS, pending
+})
+export const changeStatusRequest = (status, userId) => ({
+  type: CHANGE_STATUS_REQUEST, requestIsActive: {status, userId}
 })
 
 

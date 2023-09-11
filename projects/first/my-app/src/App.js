@@ -8,7 +8,6 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = (props) => {
   return (
-
     <div className="modules">
       <div className="app-wrapper">
         <HeaderContainer />

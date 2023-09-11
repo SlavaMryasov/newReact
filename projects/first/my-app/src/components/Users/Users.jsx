@@ -3,6 +3,7 @@ import me from './Untitled.png'
 import Loader from '../presets/Loader'
 import { NavLink } from 'react-router-dom'
 import { followRequest, unfollowRequest } from '../../api/api'
+import { toHaveFormValues } from '@testing-library/jest-dom/matchers'
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -19,27 +20,30 @@ let Users = (props) => {
           <div>
             <NavLink to={'/profile/' + user.id}>
               <img src={user.photos.small !== null ? user.photos.small : me} className={styles.img} />
-              </NavLink>
+            </NavLink>
           </div>
           <span>
             {user.followed
-              ? <button onClick={() => { 
-                unfollowRequest(user.id).then(data =>{
-                  if(data.resultCode === 0){
-                    props.unfollow(user.id) 
+              ? <button disabled={props.requestIsActive.userId == user.id ? true: false} onClick={() => { 
+                props.changeStatusRequest(true, user.id)
+                unfollowRequest(user.id).then(data => {
+                  if (data.resultCode === 0) {
+                    props.unfollow(user.id)
                   }
+                  props.changeStatusRequest(false)
                 })
-                
+               
               }}>UnFollow</button>
-              : <button onClick={() => {
-                followRequest(user.id).then(data =>{
-                  if(data.resultCode === 0){
-                    props.follow(user.id) 
-                  
+              : <button disabled={props.requestIsActive.userId == user.id ? true: false} onClick={() => {
+                props.changeStatusRequest(true, user.id)
+                followRequest(user.id).then(data => {
+                  if (data.resultCode === 0) {
+                    props.follow(user.id)
                   }
+                  props.changeStatusRequest(false)
                 })
-                
-                 }}>Follow</button>}
+
+              }}>Follow</button>}
           </span>
         </div>
         <div>
