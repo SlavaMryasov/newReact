@@ -12,7 +12,7 @@ let initialStore = {
   currentPage: 1,
   pageSize: 5,
   pending: false,
-  requestIsActive:[]
+  requestIsActive: []
 }
 
 const usersReducer = (state = initialStore, action) => {
@@ -62,9 +62,10 @@ const usersReducer = (state = initialStore, action) => {
       }
     }
     case CHANGE_STATUS_REQUEST: {
-      console.log(action)
       return {
-        ...state, requestIsActive: action.requestIsActive
+        ...state,
+        // requestIsActive: action.requestIsActive
+        requestIsActive: [...state.requestIsActive, action.requestIsActive]
       }
     }
 
@@ -95,7 +96,7 @@ export const changeStatus = (pending) => ({
   type: CHANGE_STATUS, pending
 })
 export const changeStatusRequest = (status, userId) => ({
-  type: CHANGE_STATUS_REQUEST, requestIsActive: {status, userId}
+  type: CHANGE_STATUS_REQUEST, requestIsActive: { status, userId }
 })
 
 

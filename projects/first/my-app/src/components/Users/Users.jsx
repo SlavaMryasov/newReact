@@ -25,23 +25,24 @@ let Users = (props) => {
           </div>
           <span>
             {user.followed
-              ? <button disabled={props.requestIsActive.userId == user.id ? true: false} onClick={() => { 
+              ? <button disabled={props.requestIsActive.some(el => el.userId == user.id ? true : false)} onClick={() => {
+                console.log(props.requestIsActive)
                 props.changeStatusRequest(true, user.id)
                 unfollowRequest(user.id).then(data => {
                   if (data.resultCode === 0) {
                     props.unfollow(user.id)
                   }
-                  props.changeStatusRequest(false)
+                  props.changeStatusRequest(false, user.id)
                 })
-               
+
               }}>UnFollow</button>
-              : <button disabled={props.requestIsActive.userId == user.id ? true: false} onClick={() => {
+              : <button disabled={props.requestIsActive.some(el => el.userId == user.id ? true : false)} onClick={() => {
                 props.changeStatusRequest(true, user.id)
                 followRequest(user.id).then(data => {
                   if (data.resultCode === 0) {
                     props.follow(user.id)
                   }
-                  props.changeStatusRequest(false)
+                  props.changeStatusRequest(false, user.id)
                 })
 
               }}>Follow</button>}
