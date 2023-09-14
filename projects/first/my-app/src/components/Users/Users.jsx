@@ -37,6 +37,7 @@ let Users = (props) => {
 
               }}>UnFollow</button>
               : <button disabled={props.requestIsActive.some(el => el.userId == user.id ? true : false)} onClick={() => {
+                console.log(props.requestIsActive)
                 props.changeStatusRequest(true, user.id)
                 followRequest(user.id).then(data => {
                   if (data.resultCode === 0) {

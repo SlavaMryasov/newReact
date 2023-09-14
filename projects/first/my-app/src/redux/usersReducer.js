@@ -64,8 +64,9 @@ const usersReducer = (state = initialStore, action) => {
     case CHANGE_STATUS_REQUEST: {
       return {
         ...state,
-        // requestIsActive: action.requestIsActive
-        requestIsActive: [...state.requestIsActive, action.requestIsActive]
+        // requestIsActive: [...state.requestIsActive, action.user],
+        // requestIsActive: action.user.status !== true ? [state.requestIsActive] : [...state.requestIsActive, action.user],
+        requestIsActive: action.user.status ? [...state.requestIsActive, action.user] : [state.requestIsActive], // можно написать action.user.status === true
       }
     }
 
@@ -96,7 +97,7 @@ export const changeStatus = (pending) => ({
   type: CHANGE_STATUS, pending
 })
 export const changeStatusRequest = (status, userId) => ({
-  type: CHANGE_STATUS_REQUEST, requestIsActive: { status, userId }
+  type: CHANGE_STATUS_REQUEST, user: { status, userId }
 })
 
 
