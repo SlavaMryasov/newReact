@@ -4,25 +4,23 @@ import { connect } from 'react-redux';
 import React from 'react'
 import Users from './Users';
 import { usersRequest } from '../../api/api';
+import { getUsersThunkCreator } from '../../redux/usersReducer';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.changeStatus(true)
-        usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setUsersTotalCount(data.totalCount);
-            this.props.changeStatus(false)
-        })
+        // this.props.changeStatus(true) // toggleIsFetching
+        // usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.setUsers(data.items);
+        //     this.props.setUsersTotalCount(data.totalCount);
+        //     this.props.changeStatus(false)
+        // })
 
+
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
     onChangePage = (page) => {
-        this.props.changeStatus(true)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
         this.props.changePage(page);
-        usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.changeStatus(false)
-        })
-
     }
 
     render() {
@@ -77,7 +75,10 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { follow, unfollow, setUsers, setUsers, setUsersTotalCount, changePage, changeStatus, changeStatusRequest })(UsersContainer);
+export default connect(mapStateToProps,
+     { follow, unfollow, setUsers, 
+         setUsersTotalCount, changePage,changeStatus, 
+         changeStatusRequest,getUsers: getUsersThunkCreator })(UsersContainer);
 
 
 

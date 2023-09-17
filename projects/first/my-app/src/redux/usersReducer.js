@@ -5,6 +5,7 @@ const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const CHANGE_PAGE = 'CHANGE_PAGE';
 const CHANGE_STATUS = 'CHANGE_STATUS';
 const CHANGE_STATUS_REQUEST = 'CHANGE_STATUS_REQUEST';
+import { usersRequest} from '../api/api'
 
 let initialStore = {
   users: [],
@@ -66,7 +67,7 @@ const usersReducer = (state = initialStore, action) => {
         ...state,
         // requestIsActive: [...state.requestIsActive, action.user],
         // requestIsActive: action.user.status !== true ? [state.requestIsActive] : [...state.requestIsActive, action.user],
-        requestIsActive: action.user.status ? [...state.requestIsActive, action.user] : [state.requestIsActive], // можно написать action.user.status === true
+        requestIsActive: action.user.status ? [...state.requestIsActive, action.user] : [], // можно написать action.user.status === true
       }
     }
 
@@ -100,6 +101,16 @@ export const changeStatusRequest = (status, userId) => ({
   type: CHANGE_STATUS_REQUEST, user: { status, userId }
 })
 
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+  return (dispatch) => {
+   dispatch(changeStatus(true))
+  usersRequest(currentPage, pageSize).then(data => {
+    dispatch(setUsers(data.items));
+    dispatch(setUsersTotalCount(data.totalCount));
+    dispatch(changeStatus(false));
+  })
+}}
 
 export default usersReducer;
 
