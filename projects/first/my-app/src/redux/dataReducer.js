@@ -1,4 +1,6 @@
+import { profileRequest } from '../api/api'
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+
 
 let initialStore = {
   aboutMe: "I am banana",
@@ -28,5 +30,14 @@ export const setUser = (user) => ({
   type: SET_USER_PROFILE,
   user,
 });
+
+
+export const profileRequestTC = (userId) => {
+  return (dispatch) => {
+    profileRequest(userId).then(response => {
+      dispatch(setUser(response.data));
+    })
+  }
+}
 
 export default dataReducer;

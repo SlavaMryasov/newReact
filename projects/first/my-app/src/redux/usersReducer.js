@@ -1,3 +1,5 @@
+import { usersRequest } from '../api/api';
+import { unfollowRequest, followRequest } from '../api/api';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLOWW';
 const SET_USERS = 'SET_USERS';
@@ -5,7 +7,7 @@ const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const CHANGE_PAGE = 'CHANGE_PAGE';
 const CHANGE_STATUS = 'CHANGE_STATUS';
 const CHANGE_STATUS_REQUEST = 'CHANGE_STATUS_REQUEST';
-import { usersRequest} from '../api/api'
+
 
 let initialStore = {
   users: [],
@@ -81,7 +83,6 @@ const usersReducer = (state = initialStore, action) => {
 export const follow = (userId) => ({
   type: FOLLOW, userId
 })
-
 export const unfollow = (userId) => ({
   type: UNFOLLOW, userId
 })
@@ -101,18 +102,46 @@ export const changeStatusRequest = (status, userId) => ({
   type: CHANGE_STATUS_REQUEST, user: { status, userId }
 })
 
+//ThunkCreator - это функция, которая может принимать данные-аргументы в параметры( вданном случае currentPage и pageSize)
+// и которая возвращает санку,
+//  Далее она не будет называться ThunkCreator - это детсад, назване будет по функционалу, типа getUsers
 
+// actionCreator и thunkCreator - формально одно и тоже, только thunkCreator, может возвращать не только объекты, а еще и функцию,
+// которую мы должны смочь задиспатчить 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
   return (dispatch) => {
-   dispatch(changeStatus(true))
-  usersRequest(currentPage, pageSize).then(data => {
-    dispatch(setUsers(data.items));
-    dispatch(setUsersTotalCount(data.totalCount));
-    dispatch(changeStatus(false));
-  })
-}}
+    dispatch(changeStatus(true))
+    usersRequest(currentPage, pageSize).then(data => {
+      dispatch(setUsers(data.items));
+      dispatch(setUsersTotalCount(data.totalCount));
+      dispatch(changeStatus(false));
+    })
+  }
+}
 
+export const unfollowTC = (userId) => {
+  return (dispatch) => {
+    dispatch(changeStatusRequest(true, userId))
+    unfollowRequest(userId).then(data => {
+      if (data.resultCode === 0) {
+        dispatch(unfollow(userId))
+      }
+      dispatch(changeStatusRequest(false, userId))
+    })
+  }
+}
+
+export const followTC = (userId) => {
+  return (dispatch) => {
+    dispatch(changeStatusRequest(true, userId))
+    followRequest(userId).then(data => {
+      if (data.resultCode === 0) {
+        dispatch(follow(userId))
+      }
+      dispatch(changeStatusRequest(false, userId))
+    })
+  }
+}
 export default usersReducer;
-
 
 

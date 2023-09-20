@@ -19,17 +19,22 @@ export const usersRequest = (currentPage = 1, pageSize = 10) => {
 //Users
 
 export const followRequest = (userId) => {
-   return instance.post(`follow/${userId}`)
-		.then(response => response.data)
+  return instance.post(`follow/${userId}`)
+    .then(response => response.data)
 }
 
 export const unfollowRequest = (userId) => {
   return instance.delete(`follow/${userId}`)
-   .then(response => response.data)
+    .then(response => response.data)
 }
 
 // HeaderContainer
-export const authRequest = () =>{
+export const authRequest = () => {
   return instance.get(`/auth/me`)
-.then(response => response.data)
+    .then(response => response.data)
+}
+
+// DataContainer
+export const profileRequest = (userId) => {
+  return instance.get(`/profile/${userId}`)
 }

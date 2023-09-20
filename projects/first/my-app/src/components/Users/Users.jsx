@@ -1,10 +1,8 @@
-
-
 import styles from './Users.module.css'
 import me from './Untitled.png'
 import Loader from '../presets/Loader'
 import { NavLink } from 'react-router-dom'
-import { followRequest, unfollowRequest } from '../../api/api'
+
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -26,26 +24,11 @@ let Users = (props) => {
           <span>
             {user.followed
               ? <button disabled={props.requestIsActive.some(el => el.userId == user.id ? true : false)} onClick={() => {
-                console.log(props.requestIsActive)
-                props.changeStatusRequest(true, user.id)
-                unfollowRequest(user.id).then(data => {
-                  if (data.resultCode === 0) {
-                    props.unfollow(user.id)
-                  }
-                  props.changeStatusRequest(false, user.id)
-                })
+                props.unfollow(user.id)
 
               }}>UnFollow</button>
               : <button disabled={props.requestIsActive.some(el => el.userId == user.id ? true : false)} onClick={() => {
-                console.log(props.requestIsActive)
-                props.changeStatusRequest(true, user.id)
-                followRequest(user.id).then(data => {
-                  if (data.resultCode === 0) {
-                    props.follow(user.id)
-                  }
-                  props.changeStatusRequest(false, user.id)
-                })
-
+                props.follow(user.id) // здесь сосредоточена логика запросов и диспатчей(смотреть usersReducer)
               }}>Follow</button>}
           </span>
         </div>
