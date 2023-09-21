@@ -33,3 +33,9 @@ export const authRequest = () =>{
   return instance.get(`/auth/me`)
 .then(response => response.data)
 }
+
+//Photos
+export const photosRequest = (currentPage = 1, pageSize = 100) => {
+  return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+    .then(response => response.data)
+}

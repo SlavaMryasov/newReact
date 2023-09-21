@@ -7,6 +7,7 @@ import { usersRequest } from '../../api/api';
 import { getUsersThunkCreator } from '../../redux/usersReducer';
 
 class UsersContainer extends React.Component {
+    
     componentDidMount() {
         // this.props.changeStatus(true) // toggleIsFetching
         // usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
@@ -17,6 +18,7 @@ class UsersContainer extends React.Component {
 
 
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        console.log(this.props)
     }
     onChangePage = (page) => {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
@@ -37,7 +39,6 @@ class UsersContainer extends React.Component {
     }
 
 }
-
 
 const mapStateToProps = (state) => {
     return {

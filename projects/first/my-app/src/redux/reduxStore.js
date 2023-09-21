@@ -4,12 +4,14 @@ import dataReducer from "./dataReducer";
 import dialogsReducer from "./dialogsReducer";
 import usersReducer from "./usersReducer";
 import thunkMiddleware from 'redux-thunk'
+import photosReducer from "./photosReducer";
 
 let reducers = combineReducers({
   dialogsPage: dialogsReducer,
   usersPage: usersReducer,
   profilePage: dataReducer,
-  auth: authReducer
+  auth: authReducer,
+  photosPage: photosReducer
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware));
