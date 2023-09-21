@@ -1,27 +1,20 @@
 
-import { follow, setUsers, unfollow, setUsersTotalCount, changePage, changeStatus, changeStatusRequest } from '../../redux/usersReducer';
+import { follow, changePage, changeStatusRequest, unfollowTC, followTC } from '../../redux/usersReducer';
 import { connect } from 'react-redux';
 import React from 'react'
 import Users from './Users';
-import { usersRequest } from '../../api/api';
 import { getUsersThunkCreator } from '../../redux/usersReducer';
+
 
 class UsersContainer extends React.Component {
     
     componentDidMount() {
-        // this.props.changeStatus(true) // toggleIsFetching
-        // usersRequest(this.props.currentPage, this.props.pageSize).then(data => {
-        //     this.props.setUsers(data.items);
-        //     this.props.setUsersTotalCount(data.totalCount);
-        //     this.props.changeStatus(false)
-        // })
-
-
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
     onChangePage = (page) => {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
         this.props.changePage(page);
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+
     }
 
     render() {
@@ -33,8 +26,7 @@ class UsersContainer extends React.Component {
             follow={this.props.follow}
             unfollow={this.props.unfollow}
             pending={this.props.pending}
-            requestIsActive={this.props.requestIsActive}
-            changeStatusRequest={this.props.changeStatusRequest} />
+            requestIsActive={this.props.requestIsActive} />
     }
 
 }
@@ -76,9 +68,11 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-     { follow, unfollow, setUsers, 
-         setUsersTotalCount, changePage,changeStatus, 
-         changeStatusRequest,getUsers: getUsersThunkCreator })(UsersContainer);
+    {
+        follow, changePage,
+        changeStatusRequest, getUsers: getUsersThunkCreator, // или просто getUsers, но тогда и в редъюсере она тоже getUsers
+        unfollow: unfollowTC, follow: followTC
+    })(UsersContainer);
 
 
 
