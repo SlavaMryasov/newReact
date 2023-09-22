@@ -30,21 +30,19 @@ export const unfollowRequest = (userId) => {
 
 // HeaderContainer
 export const authRequest = () => {
-  return instance.get(`/auth/me`)
-<<<<<<< HEAD
-.then(response => response.data)
+  return instance.get(`/auth/me`).then(response => response.data)
 }
 
 //Photos
 export const photosRequest = (currentPage = 1, pageSize = 100) => {
   return instance.get(`users?page=${currentPage}&count=${pageSize}`)
     .then(response => response.data)
-=======
-    .then(response => response.data)
+
+    
 }
 
 // DataContainer
 export const profileRequest = (userId) => {
   return instance.get(`/profile/${userId}`)
->>>>>>> f3715ce1d6b9134d288f714c8e4a37674d7eaa6c
+
 }
