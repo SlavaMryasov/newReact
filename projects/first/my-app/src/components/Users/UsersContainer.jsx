@@ -26,7 +26,8 @@ class UsersContainer extends React.Component {
             follow={this.props.follow}
             unfollow={this.props.unfollow}
             pending={this.props.pending}
-            requestIsActive={this.props.requestIsActive} />
+            requestIsActive={this.props.requestIsActive} 
+            isAuth={this.props.isAuth}/>
     }
 
 }
@@ -38,7 +39,8 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         pending: state.usersPage.pending,
-        requestIsActive: state.usersPage.requestIsActive
+        requestIsActive: state.usersPage.requestIsActive,
+        isAuth: state.auth.isAuth
     }
 }
 
