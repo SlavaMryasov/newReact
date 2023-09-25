@@ -1,7 +1,7 @@
 import styles from './Users.module.css'
 import me from './Untitled.png'
 import Loader from '../presets/Loader'
-import { NavLink, Navigate } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 
 
 let Users = (props) => {
@@ -11,7 +11,7 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)
   }
- if (!props.isAuth) return <Navigate to='../login'/>
+
   return <div>
     {props.pending === true ? <Loader /> : null}
     {

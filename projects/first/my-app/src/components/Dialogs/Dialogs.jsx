@@ -26,7 +26,6 @@ const Dialogs = (props) => {
     props.characterToStateInContainer(text)
   }
 
-  if (!props.isAuth) return <Navigate to="../login" replace={true}/>;
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogsItems}>
