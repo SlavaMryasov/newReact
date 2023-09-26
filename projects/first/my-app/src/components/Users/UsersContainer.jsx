@@ -5,10 +5,11 @@ import React from 'react'
 import Users from './Users';
 import { getUsersThunkCreator } from '../../redux/usersReducer';
 import { authWithRedirect } from '../../hocs/authWithRedirect';
+import { compose } from 'redux';
 
 
 class UsersContainer extends React.Component {
-    
+
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
@@ -27,13 +28,10 @@ class UsersContainer extends React.Component {
             follow={this.props.follow}
             unfollow={this.props.unfollow}
             pending={this.props.pending}
-            requestIsActive={this.props.requestIsActive} 
-            isAuth={this.props.isAuth}/>
+            requestIsActive={this.props.requestIsActive}
+            isAuth={this.props.isAuth} />
     }
-
 }
-
-let authWithRedirectComponent = authWithRedirect(UsersContainer);
 
 const mapStateToProps = (state) => {
     return {
@@ -46,17 +44,14 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,
-    {
+export default compose(
+    authWithRedirect,
+    connect(mapStateToProps, {
         follow, changePage,
-        changeStatusRequest, getUsers: getUsersThunkCreator, // или просто getUsers, но тогда и в редъюсере она тоже getUsers
+        changeStatusRequest, getUsers: getUsersThunkCreator,
         unfollow: unfollowTC, follow: followTC
-    })(authWithRedirectComponent);
-
-
-
-
-
+    })
+)(UsersContainer)
 
 
 

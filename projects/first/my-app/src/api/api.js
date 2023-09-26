@@ -38,11 +38,11 @@ export const photosRequest = (currentPage = 1, pageSize = 100) => {
   return instance.get(`users?page=${currentPage}&count=${pageSize}`)
     .then(response => response.data)
 
-    
+
 }
 
 // DataContainer
 export const profileRequest = (userId) => {
-  return instance.get(`/profile/${userId}`)
+  return userId ? instance.get(`/profile/${userId}`) : instance.get(`/profile/29915`)
 
 }
