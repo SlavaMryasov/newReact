@@ -46,3 +46,11 @@ export const profileRequest = (userId) => {
   return userId ? instance.get(`/profile/${userId}`) : instance.get(`/profile/29915`)
 
 }
+
+export const getUserStatus = (userId) => {
+  return instance.get(`/profile/status/${userId}`)
+}
+
+export const updateUserStatus = (status) => {
+  return instance.put(`/profile/status`, {status:status})
+}
