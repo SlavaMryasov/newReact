@@ -3,7 +3,8 @@ import Data from './Data';
 import { connect } from 'react-redux';
 import { profileRequestTC, setUser } from './../../../redux/dataReducer'
 import { useLocation, useNavigate, useParams } from 'react-router';
-import { setUserStatusTC } from './../../../redux/dataReducer';
+import { getUserStatusTC } from './../../../redux/dataReducer';
+import { updateUserStatusTC } from './../../../redux/dataReducer';
 
 
 
@@ -29,12 +30,12 @@ class DataContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId
     this.props.profileRequest(userId)
-    this.props.setUserStatus(userId)
+    this.props.getUserStatus(userId)
   }
 
   render() {
     return (
-      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos} status={this.props.status}/>
+      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
     )
   }
 
@@ -50,4 +51,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { setUser, profileRequest: profileRequestTC, setUserStatus: setUserStatusTC })(withRouter(DataContainer));
+export default connect(mapStateToProps, { setUser, profileRequest: profileRequestTC, getUserStatus: getUserStatusTC, updateUserStatus: updateUserStatusTC })(withRouter(DataContainer));

@@ -7,21 +7,36 @@ class ProfileStatus extends React.Component {
     status: this.props.status
   }
 
-  changeModifyStatus = (status) => {
+  changeModifyStatusOnTrue = () => {
     this.setState({ // АСИНХРОНЩИНА
-      modify: status
+      modify: true
     })
   }
-  
+ 
+  changeModifyStatusOnFalse = () => {
+    this.setState({ // АСИНХРОНЩИНА
+      modify: false
+    })
+    this.props.updateUserStatus(this.state.status)
+  }
+ 
+  onStatusChange =(event) =>{
+    this.setState({ 
+      status : event.currentTarget.value
+    })
+   
+  }
+  //props.updateUserStatus
+
   render() {
     return (
       <div>
         {!this.state.modify
           ? <div>
-            <span onDoubleClick={()=>this.changeModifyStatus(true)}>{this.props.status}</span>
+            <span onDoubleClick={()=>this.changeModifyStatusOnTrue(true)}>{this.props.status}</span>
           </div>
           : <div>
-            <input  autoFocus={true} onBlur={()=>this.changeModifyStatus(false)} value={this.state.status}></input>
+            <input onChange={this.onStatusChange} autoFocus={true} onBlur={()=>this.changeModifyStatusOnFalse(false)} value={this.state.status}></input>
           </div>
         }
       </div>
@@ -30,3 +45,6 @@ class ProfileStatus extends React.Component {
 }
 
 export default ProfileStatus;
+
+
+

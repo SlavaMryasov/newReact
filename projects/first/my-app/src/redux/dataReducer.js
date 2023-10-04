@@ -1,4 +1,4 @@
-import { profileRequest, getUserStatus } from '../api/api'
+import { profileRequest, getUserStatus, updateUserStatus } from '../api/api'
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_USER_STATUS = 'SET_USER_STATUS';
 
@@ -9,7 +9,7 @@ let initialStore = {
     large: null,
     small: null,
   },
-  status: 'default status'
+  status: ' _default status'
 };
 
 const dataReducer = (state = initialStore, action) => {
@@ -51,10 +51,20 @@ export const profileRequestTC = (userId) => {
   }
 }
 
-export const setUserStatusTC = (userId) => {
+export const getUserStatusTC = (userId) => {
   return (dispatch) => {
     getUserStatus(userId).then(response => {
       dispatch(setUserStatus(response.data));
+    })
+  }
+}
+
+export const updateUserStatusTC = (status) => {
+  return (dispatch) => {
+    updateUserStatus(status).then(response => {
+      if(response.data.resultCode === 0){
+        dispatch(setUserStatus(status));
+      }
     })
   }
 }
