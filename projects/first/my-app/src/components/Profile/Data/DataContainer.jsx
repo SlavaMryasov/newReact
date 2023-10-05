@@ -33,6 +33,14 @@ class DataContainer extends React.Component {
     this.props.getUserStatus(userId)
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.status !== this.props.status){
+      this.setState({
+        status: this.props.status
+      })
+    }
+  }
+
   render() {
     return (
       <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>

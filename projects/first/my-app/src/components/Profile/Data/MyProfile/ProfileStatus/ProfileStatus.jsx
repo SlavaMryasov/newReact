@@ -26,7 +26,7 @@ class ProfileStatus extends React.Component {
     })
    
   }
-  //props.updateUserStatus
+ 
 
   render() {
     return (
