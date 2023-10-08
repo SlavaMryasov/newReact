@@ -1,5 +1,7 @@
+import { connect } from 'react-redux';
 import React from "react";
 import {reduxForm, Field} from 'redux-form'
+import { postLoginTC } from "../../redux/authReducer";
 
 
 const LoginForm = (props) => {
@@ -25,6 +27,7 @@ const LoginReduxForm = reduxForm({ form: 'login'})(LoginForm) // login - это 
 
 const Login = (props) => {
   const onSubmit = (formData)=> {
+    props.postLogin(formData)
   }
   return <div>
     <h1>Login</h1>
@@ -33,5 +36,10 @@ const Login = (props) => {
 
 }
 
+const mapStateToProps =(state) =>{
+  return {
+    userId: state.auth.userId
+  }
+}
 
-export default Login;
+export default connect(mapStateToProps, {postLogin: postLoginTC})(Login);

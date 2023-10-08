@@ -34,8 +34,8 @@ export const authRequest = () => {
 }
 
 
-export const loginRequest = (data) => {
-return instance.post(`/auth/login`, data)
+export const loginRequest = (email, password, rememberMe) => {
+return instance.post(`/auth/login`, {email, password, rememberMe})
 .then(response => response.data)
 }
 

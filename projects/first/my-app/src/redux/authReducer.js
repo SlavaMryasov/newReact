@@ -8,7 +8,7 @@ let initialStore = {
     email: null,
     login: null,
     isAuth: false,
-    data: null
+    userId: null
 }
 
 const authReducer = (state = initialStore, action) => {
@@ -20,6 +20,7 @@ const authReducer = (state = initialStore, action) => {
                 isAuth: true
             }
             case SET_LOGIN: 
+            console.log(action.data, 'action')
             return{
                 ...state,
                 ...action.data
@@ -38,8 +39,8 @@ export const setLogin = (data) => ({
 
 export const postLoginTC =(data)=> {
     return (dispatch) => {
-        loginRequest(data).then(response =>{
-            dispatch(setLogin(data))
+        loginRequest(data.login, data.password, data.rememberMe).then(response =>{
+            dispatch(setLogin(response))
         })
     }
 }
