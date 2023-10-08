@@ -4,16 +4,16 @@ import dataReducer from "./dataReducer";
 import dialogsReducer from "./dialogsReducer";
 import usersReducer from "./usersReducer";
 import photosReducer from "./photosReducer";
-
 import thunkMiddleware from 'redux-thunk' // промежуточный уровень внедряемы в стор
-
+import {reducer as formReducer} from 'redux-form'
 
 let reducers = combineReducers({
   dialogsPage: dialogsReducer,
   usersPage: usersReducer,
   profilePage: dataReducer,
   auth: authReducer,
-  photosPage: photosReducer
+  photosPage: photosReducer,
+  form: formReducer
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware));// applyMiddleware прими промежуточные слои,
