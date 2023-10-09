@@ -5,7 +5,9 @@ import { postLoginTC } from "../../redux/authReducer";
 
 
 const LoginForm = (props) => {
+  console.log(props.handleSubmit)
   return( // field для того, что бы не писать onChange во всех input, это как контейнерная компонента, которая рисует другую компоненту
+    // handlSubmit-колбэк придет из редакс форм, доверяем обработку сабмита(не перезагружай формочку)
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field placeholder={"Login"} name={"login"} component={'input'}/> 
