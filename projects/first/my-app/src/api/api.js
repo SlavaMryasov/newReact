@@ -50,7 +50,7 @@ export const photosRequest = (currentPage = 1, pageSize = 100) => {
 
 // DataContainer
 export const profileRequest = (userId) => {
-  return userId ? instance.get(`/profile/${userId}`) : instance.get(`/profile/29915`)
+  return instance.get(`/profile/${userId}`)
 
 }
 

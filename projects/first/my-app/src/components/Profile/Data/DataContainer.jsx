@@ -6,8 +6,6 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import { getUserStatusTC } from './../../../redux/dataReducer';
 import { updateUserStatusTC } from './../../../redux/dataReducer';
 
-
-
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     let location = useLocation();
@@ -29,8 +27,8 @@ class DataContainer extends React.Component {
 
   componentDidMount() {
     let userId = this.props.router.params.userId
-    this.props.profileRequest(userId)
-    this.props.getUserStatus(userId)
+    this.props.profileRequest(userId ? userId: 29915)
+    this.props.getUserStatus(userId ? userId: 29915)
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -43,7 +41,7 @@ class DataContainer extends React.Component {
 
   render() {
     return (
-      <Data aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
+      <Data userId={this.props.router.params.userId} aboutMe={this.props.aboutMe} fullName={this.props.fullName} photos={this.props.photos} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
     )
   }
 

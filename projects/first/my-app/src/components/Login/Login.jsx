@@ -8,6 +8,9 @@ const LoginForm = (props) => {
   console.log(props.handleSubmit)
   return( // field для того, что бы не писать onChange во всех input, это как контейнерная компонента, которая рисует другую компоненту
     // handlSubmit-колбэк придет из редакс форм, доверяем обработку сабмита(не перезагружай формочку)
+    // эта функция получит данные формы, если проверка формы прошла успешно
+    // в handleSubmit написано e.prevent:default(отмена действия по умолчанию), внутри собираются все значения из формы 
+    // и внутри вызывается родительская функция, что бы передать из формы значения во вне
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field placeholder={"Login"} name={"login"} component={'input'}/> 

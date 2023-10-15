@@ -8,16 +8,19 @@ class ProfileStatus extends React.Component {
   }
 
   changeModifyStatusOnTrue = () => {
-    this.setState({ // АСИНХРОНЩИНА
+    //alert(this.props.userId)
+    if( !this.props.userId || this.props.userId==29915) {
+      this.setState({ // АСИНХРОНЩИНА
       modify: true
     })
+  }
   }
  
   changeModifyStatusOnFalse = () => {
     this.setState({ // АСИНХРОНЩИНА
       modify: false
     })
-    this.props.updateUserStatus(this.state.status)
+ this.props.updateUserStatus(this.state.status)
   }
  
   onStatusChange =(event) =>{
@@ -26,7 +29,6 @@ class ProfileStatus extends React.Component {
     })
    
   }
- 
 
   render() {
     return (

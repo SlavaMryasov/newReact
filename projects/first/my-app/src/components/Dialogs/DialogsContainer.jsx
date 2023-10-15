@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { characterToStateActionCreator, sendMessageActionCreator } from '../../redux/dialogsReducer';
+import {sendMessageActionCreator } from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import { authWithRedirect } from '../../hocs/authWithRedirect';
 import { compose } from 'redux';
@@ -15,12 +15,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendMessageInContainer: (text) => {
+    sendMessage: (text) => {
       dispatch(sendMessageActionCreator(text))
     },
-    characterToStateInContainer: (text) => {
-      dispatch(characterToStateActionCreator(text))
-    }
   }
 }
 

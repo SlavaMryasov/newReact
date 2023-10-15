@@ -12,7 +12,9 @@ const MyProfile = (props) => {
         <div>{props.fullName}</div>
         <div>{props.aboutMe}</div>
       </div>
-      <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+      <div className={styles.status}>
+      <ProfileStatus userId ={props.userId} status={props.status} updateUserStatus={props.updateUserStatus}/>
+      </div>
     </div>
   )
 }

@@ -1,22 +1,22 @@
+import { Field, reduxForm } from 'redux-form';
 import Post from './Post/Post';
 import styles from './Posts.module.css';
 
 
-let postsData = [
-  {id:1, message: 'Hi! How are you?', likesCount: 2},
-  {id:2, message: 'it is my first post!', likesCount: 3},
-  {id:3, message: 'shikaka!', likesCount: 5},
-]
+const Posts = (props) => {
 
-let postsElement = postsData.map(post => <Post message={post.message} key={post.id}/>)
+  let postsElement = props.postsData.map(post => <Post message={post.message} key={post.id} />)
 
-const Posts = () => {
+  const addNewPost = (values) => {
+    console.log(props.postsData)
+    props.setPostss(({ id: 4,message:values.textareaForPost, likesCount: 5}))
+  }
+
   return (
     <div className={styles.posts}>
       <div className={styles.NewPosts}>
         <div>My posts</div>
-        <div><textarea></textarea></div>
-        <button className={styles.send}>Send</button>
+        <PostFormRedux onSubmit={addNewPost} />
       </div>
       <div className={styles.messages}>
         {postsElement}
@@ -25,4 +25,19 @@ const Posts = () => {
   )
 }
 
-export default Posts;
+const PostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field component='textarea' name='textareaForPost' placeholder='enter Your message post' />
+        <div>
+          <button>Send</button>
+        </div>
+      </div>
+    </form>
+  )
+}
+
+const PostFormRedux = reduxForm({ form: 'addPostForm' })(PostForm)
+
+export default Posts

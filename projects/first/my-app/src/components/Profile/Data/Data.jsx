@@ -1,6 +1,6 @@
 import styles from './Data.module.css'
-import Posts from './Posts/Posts';
 import MyProfile from './MyProfile/MyProfile';
+import PostsContainer from './Posts/PostsContainer';
 
 const Data = (props) => {
   return (
@@ -9,8 +9,8 @@ const Data = (props) => {
         <img className={styles.background} src="https://fullhdoboi.ru/wp-content/uploads/_ph/6/283114741.jpg" />
       </div>
       <div className={styles.data}>
-        <MyProfile aboutMe={props.aboutMe} fullName={props.fullName} photos={props.photos} status={props.status} updateUserStatus={props.updateUserStatus}/>
-        <Posts />
+        <MyProfile userId={props.userId} aboutMe={props.aboutMe} fullName={props.fullName} photos={props.photos} status={props.status} updateUserStatus={props.updateUserStatus}/>
+        <PostsContainer />
       </div>
     </div>
   )
