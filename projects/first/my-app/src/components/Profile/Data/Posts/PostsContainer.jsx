@@ -6,28 +6,28 @@ import Posts from './Posts';
 
 
 class PostsContainer extends React.Component {
+componentDidMount(){
+  console.log( this.props.postsData,'mount')
+  setPosts(this.props.postsData)
+  console.log(setPosts(this.props.postsData),'dw')
+}
 
-  setPostss(post) {
-    console.log(post, 'sdadasdasdas')
-setPosts(post)
+componentDidUpdate(prevProps, prevState){
+  if(prevProps.postsData !== this.props.postsData){
+    this.setState({
+      postsData: this.props.postsData
+    })
   }
-  componentDidMount() {
-    console.log('mount')
+}
+  addNewPost(post){
+    console.log(this.postsData, 'asdf')
+    this.postsData.push(post)
+    setPosts(this.postsData)
   }
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.prevProps, 'update')
-
-    if (prevProps.postsData !== this.props.postsData) {
-      this.setState({
-
-        postsData: this.props.postsData
-      })
-    }
-  }
+  
   render() {
-    console.log(this.props)
     return (
-      <Posts postsData={this.props.postsData} setPostss={this.setPostss} />
+      <Posts postsData={this.props.postsData} addNewPost={this.addNewPost}/>
     )
   }
 }

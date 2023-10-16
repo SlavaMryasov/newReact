@@ -11,19 +11,19 @@ const initialStore = {
 const postsReducer = (state = initialStore, action) => {
   switch (action.type){
     case SET_POSTS: {
-      console.log(action.posts, 'dawdaa')
+      console.log(action.postsData, 'dawdaa')
       return{
         ...state,
-        posts: action.posts 
+        postsData: action.postsData
       }
     }
     default: return state
   }
 }
 
-export const setPosts = (posts) => ({
+export const setPosts = (postsData) => ({
   type: SET_POSTS,
-   posts,
+   postsData,
 });
 
 
