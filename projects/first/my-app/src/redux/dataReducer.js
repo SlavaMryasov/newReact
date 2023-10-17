@@ -1,6 +1,7 @@
 import { profileRequest, getUserStatus, updateUserStatus } from '../api/api'
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const SET_POSTS = 'SET_POSTS'
 
 let initialStore = {
   aboutMe: "I am banana",
@@ -9,7 +10,12 @@ let initialStore = {
     large: null,
     small: null,
   },
-  status: ' _default status'
+  status: ' _default status',
+  postsData : [
+    { id: 1, message: 'Hi! How are you?', likesCount: 2 },
+    { id: 2, message: 'it is my first post!', likesCount: 3 },
+    { id: 3, message: 'shikaka!', likesCount: 5 },
+  ]
 };
 
 const dataReducer = (state = initialStore, action) => {
@@ -28,6 +34,13 @@ const dataReducer = (state = initialStore, action) => {
         status: action.status
       };
     }
+    case SET_POSTS: {
+      console.log(action.postsData, 'case setPost')
+      return{
+        ...state,
+        postsData: action.postsData
+      }
+    }
     default:
       return state;
   }
@@ -42,6 +55,13 @@ export const setUserStatus = (status) => ({
   type: SET_USER_STATUS,
 status,
 })
+
+export const setPosts =(postsData)=> ({
+  type: SET_POSTS,
+  postsData 
+})
+
+
 
 export const profileRequestTC = (userId) => {
   return (dispatch) => {

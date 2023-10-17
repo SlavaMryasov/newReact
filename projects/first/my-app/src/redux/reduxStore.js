@@ -6,7 +6,7 @@ import usersReducer from "./usersReducer";
 import photosReducer from "./photosReducer";
 import thunkMiddleware from 'redux-thunk' // промежуточный уровень внедряемы в стор
 import {reducer as formReducer} from 'redux-form'
-import postsReducer from "./postsReducer";
+//import postsReducer from "./postsReducer";
 
 let reducers = combineReducers({
   dialogsPage: dialogsReducer,
@@ -15,7 +15,7 @@ let reducers = combineReducers({
   auth: authReducer,
   photosPage: photosReducer,
   form: formReducer,
-  posts: postsReducer
+ // posts: postsReducer
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware));// applyMiddleware прими промежуточные слои,
