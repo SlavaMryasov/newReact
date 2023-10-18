@@ -1,27 +1,28 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import Posts from './Posts';
-import { setPosts } from '../../../../redux/dataReducer';
+import { addPost, setPosts, postsData } from '../../../../redux/dataReducer';
 
 
 class PostsContainer extends React.Component {
-// componentDidMount(){
-//   console.log(this.props, 'componentDidMountProps')
-//   this.props.setPosts(this.props.postsData)
-// }
-
-addNewPost(post){
-  this.postsData.push(post)
+componentDidMount(){
+ console.log(this.props, 'componentDidMountProps')
+  this.props.setPosts(postsData)
 }
 
-// componentDidUpdate(prevProps, prevState){
-//   console.log('componentDidUpdate')
-//   if(prevProps.postsData !== this.props.postsData){
-//     this.props.setState({
-//       postsData: this.props.postsData
-//     })
-//   }
-// }
+addNewPost(postText){
+  console.log(postText, 'postText', this)
+  //this.props.addPost(postText)
+}
+
+componentDidUpdate(prevProps, prevState){
+  //console.log('componentDidUpdate')
+  if(prevProps.postsData !== this.props.postsData){
+    this.setState({
+      postsData: this.props.postsData
+    })
+  }
+}
 
   render() {
     return (
@@ -33,10 +34,9 @@ addNewPost(post){
 const mapStateToProps = (state) => {
   return {
     postsData: state.profilePage.postsData,
-    setPosts: setPosts()
   }
 }
 
 
 
-export default connect(mapStateToProps, { setPosts})(PostsContainer);
+export default connect(mapStateToProps, {addPost,setPosts})(PostsContainer);

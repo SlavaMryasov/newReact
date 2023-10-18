@@ -18,12 +18,13 @@ import styles from './Posts.module.css';
   const PostFormRedux = reduxForm({ form: 'addPostForm' })(PostForm)
   
   const Posts = (props) => {
-
+//console.log(props, 'dasd')
     const newPost = (values)=> {
-      props.addNewPost({id:4, message:values.textareaForPost, likesCount: 2})
+      props.addNewPost(values.textareaForPost)
     }
 
   let postsElement = props.postsData.map(post => <Post message={post.message} key={post.id} />)
+
   return (
     <div className={styles.posts}>
       <div className={styles.NewPosts}>

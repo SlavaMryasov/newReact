@@ -1,7 +1,15 @@
 import { profileRequest, getUserStatus, updateUserStatus } from '../api/api'
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_USER_STATUS = 'SET_USER_STATUS';
-const SET_POSTS = 'SET_POSTS'
+const SET_POSTS = 'SET_POSTS';
+const ADD_POST = 'ADD_POST';
+
+export let postsData = [
+  { id: 1, message: 'Hi! How are you?', likesCount: 2 },
+  { id: 2, message: 'it is my first post!', likesCount: 3 },
+  { id: 3, message: 'shikaka!', likesCount: 5 },
+]
+
 
 let initialStore = {
   aboutMe: "I am banana",
@@ -11,11 +19,7 @@ let initialStore = {
     small: null,
   },
   status: ' _default status',
-  postsData : [
-    { id: 1, message: 'Hi! How are you?', likesCount: 2 },
-    { id: 2, message: 'it is my first post!', likesCount: 3 },
-    { id: 3, message: 'shikaka!', likesCount: 5 },
-  ]
+  postsData: []
 };
 
 const dataReducer = (state = initialStore, action) => {
@@ -35,10 +39,17 @@ const dataReducer = (state = initialStore, action) => {
       };
     }
     case SET_POSTS: {
-      console.log(action.postsData, 'case setPost')
       return{
         ...state,
         postsData: action.postsData
+      }
+    }
+    case ADD_POST: {
+      let newPost = {id:4, message:newPost, likesCount: 2}
+      console.log(newPost, 'act')
+      return{
+        ...state,
+        postsData: [...state.postsData, newPost]
       }
     }
     default:
@@ -61,6 +72,10 @@ export const setPosts =(postsData)=> ({
   postsData 
 })
 
+export const addPost = (newPost) => ({
+  type: ADD_POST,
+  newPost
+})
 
 
 export const profileRequestTC = (userId) => {
