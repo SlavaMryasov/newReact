@@ -10,9 +10,8 @@ componentDidMount(){
   this.props.setPosts(postsData)
 }
 
-addNewPost(postText){
-  console.log(postText, 'postText', this)
-  //this.props.addPost(postText)
+addNewPost=(newPost)=>{
+  this.props.addPost(newPost)
 }
 
 componentDidUpdate(prevProps, prevState){

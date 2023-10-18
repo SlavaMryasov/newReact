@@ -20,7 +20,7 @@ import styles from './Posts.module.css';
   const Posts = (props) => {
 //console.log(props, 'dasd')
     const newPost = (values)=> {
-      props.addNewPost(values.textareaForPost)
+      props.addNewPost({id:4, message:values.textareaForPost, likesCount: 2})
     }
 
   let postsElement = props.postsData.map(post => <Post message={post.message} key={post.id} />)

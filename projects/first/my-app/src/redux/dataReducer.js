@@ -45,11 +45,9 @@ const dataReducer = (state = initialStore, action) => {
       }
     }
     case ADD_POST: {
-      let newPost = {id:4, message:newPost, likesCount: 2}
-      console.log(newPost, 'act')
       return{
         ...state,
-        postsData: [...state.postsData, newPost]
+        postsData: [...state.postsData, action.newPost]
       }
     }
     default:
