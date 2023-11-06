@@ -1,3 +1,4 @@
+
 .logo {
   height: 100%;
 }
@@ -13,4 +14,30 @@
 
 .loginBlock{
   float: right;
+}
+
+.loginHidden {
+  display: none;
+}
+
+.settings{
+  position: relative;
+   z-index:2;
+  width: 15vw;
+  height: 12vh;
+  background: rgba(133, 131, 131, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  float: right;
+}
+.settings button {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.settingsHidden{ 
+  display: none;
 }

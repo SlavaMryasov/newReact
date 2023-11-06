@@ -6,7 +6,6 @@ import { addPost, setPosts, postsData } from '../../../../redux/dataReducer';
 
 class PostsContainer extends React.Component {
 componentDidMount(){
- console.log(this.props, 'componentDidMountProps')
   this.props.setPosts(postsData)
 }
 

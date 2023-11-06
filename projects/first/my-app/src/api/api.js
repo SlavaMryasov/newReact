@@ -39,6 +39,10 @@ return instance.post(`/auth/login`, {email, password, rememberMe})
 .then(response => response.data)
 }
 
+export const logoutRequest = () => {
+  return instance.delete(`/auth/login`)
+  .then(response => response.data)
+}
 
 //Photos
 export const photosRequest = (currentPage = 1, pageSize = 100) => {

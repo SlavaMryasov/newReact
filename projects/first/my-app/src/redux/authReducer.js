@@ -8,39 +8,31 @@ let initialStore = {
     email: null,
     login: null,
     isAuth: false,
-    userId: null
+    userId: null,
+    openSettings: false
 }
 
 const authReducer = (state = initialStore, action) => {
     switch(action.type) {
-        case SET_AUTH_ME: 
+        case SET_AUTH_ME:
             return{
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.isAuth
             }
-            case SET_LOGIN: 
-            console.log(action.data, 'action')
-            return{
-                ...state,
-                ...action.data
-            } 
         default: return state;
     }
 }
 
-export const setAuthUserData = (id, email, login) => ({
-    type: SET_AUTH_ME, data: {id, email, login}
+export const setAuthUserData = (id, email, login, isAuth) => ({
+    type: SET_AUTH_ME, data: {id, email, login}, isAuth
 });
 
-export const setLogin = (data) => ({
-    type: SET_LOGIN, data
-})
 
 export const postLoginTC =(data)=> {
     return (dispatch) => {
         loginRequest(data.login, data.password, data.rememberMe).then(response =>{
-            dispatch(setLogin(response))
+            dispatch(setAuthUserData(response))
         })
     }
 }
