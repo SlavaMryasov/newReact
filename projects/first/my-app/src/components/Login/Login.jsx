@@ -2,7 +2,11 @@ import { connect } from 'react-redux';
 import React from "react";
 import {reduxForm, Field} from 'redux-form'
 import { postLoginTC } from "../../redux/authReducer";
+import { maxLengthCreator, required } from '../../utils/validators/validators';
+import { Input } from '../FormsControls/FormsControls';
 
+const maxLength30 = maxLengthCreator(30)
+const maxLength20 = maxLengthCreator(20)
 
 const LoginForm = (props) => {
   return( // field для того, что бы не писать onChange во всех input, это как контейнерная компонента, которая рисует другую компоненту
@@ -12,10 +16,10 @@ const LoginForm = (props) => {
     // и внутри вызывается родительская функция, что бы передать из формы значения во вне
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder={"Login"} name={"login"} component={'input'}/> 
+        <Field placeholder={"Login"} name={"login"} component={Input} validate={[required, maxLength30 ]}/> 
       </div>
       <div>
-        <Field placeholder={"Password"} name={"password"}  component={'input'}  />
+        <Field placeholder={"Password"} name={"password"}  component={Input} validate={[required, maxLength20 ]} />
       </div>
       <div>
         <Field  component={'input'} name={"rememberMe"} type={"checkbox"} /> remember me
