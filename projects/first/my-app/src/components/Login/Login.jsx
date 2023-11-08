@@ -1,53 +1,62 @@
 import { connect } from 'react-redux';
 import React from "react";
-import {reduxForm, Field} from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import { postLoginTC } from "../../redux/authReducer";
 import { maxLengthCreator, required } from '../../utils/validators/validators';
 import { Input } from '../FormsControls/FormsControls';
+import styles from '../FormsControls/FormsControls.module.css'
+import { Navigate } from 'react-router-dom';
 
 const maxLength30 = maxLengthCreator(30)
 const maxLength20 = maxLengthCreator(20)
 
 const LoginForm = (props) => {
-  return( // field для того, что бы не писать onChange во всех input, это как контейнерная компонента, которая рисует другую компоненту
+  return ( // field для того, что бы не писать onChange во всех input, это как контейнерная компонента, которая рисует другую компоненту
     // handlSubmit-колбэк придет из редакс форм, доверяем обработку сабмита(не перезагружай формочку)
     // эта функция получит данные формы, если проверка формы прошла успешно
     // в handleSubmit написано e.prevent:default(отмена действия по умолчанию), внутри собираются все значения из формы 
     // и внутри вызывается родительская функция, что бы передать из формы значения во вне
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder={"Login"} name={"login"} component={Input} validate={[required, maxLength30 ]}/> 
+        <Field placeholder={"Login"} name={"login"} component={Input} validate={[required, maxLength30]} />
       </div>
       <div>
-        <Field placeholder={"Password"} name={"password"}  component={Input} validate={[required, maxLength20 ]} />
+        <Field placeholder={"Password"} name={"password"} component={Input} validate={[required, maxLength20]} />
       </div>
       <div>
-        <Field  component={'input'} name={"rememberMe"} type={"checkbox"} /> remember me
+        <Field component={'input'} name={"rememberMe"} type={"checkbox"} /> remember me
       </div>
       <div>
         <button>Login</button>
+        {props.error && <div className={styles.formSummeryError}>
+          {props.error}
+        </div>}
       </div>
     </form>
   )
 }
 
-const LoginReduxForm = reduxForm({ form: 'login'})(LoginForm) // login - это уникальное имя, для того что бы redux-form не путалась, какая форма к чему относится
+const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm) // login - это уникальное имя, для того что бы redux-form не путалась, какая форма к чему относится
 
 const Login = (props) => {
-  const onSubmit = (formData)=> {
+  const onSubmit = (formData) => {
     props.postLogin(formData)
+  }
+  if(props.isAuth){
+     return <Navigate to='../profile' />
   }
   return <div>
     <h1>Login</h1>
-    <LoginReduxForm onSubmit={onSubmit}/>
+    <LoginReduxForm onSubmit={onSubmit} />
   </div>
 
 }
 
-const mapStateToProps =(state) =>{
+const mapStateToProps = (state) => {
   return {
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    isAuth: state.auth.isAuth
   }
 }
 
-export default connect(mapStateToProps, {postLogin: postLoginTC})(Login);
+export default connect(mapStateToProps, { postLogin: postLoginTC })(Login);

@@ -30,7 +30,8 @@ export const unfollowRequest = (userId) => {
 
 // HeaderContainer
 export const authRequest = () => {
-  return instance.get(`/auth/me`).then(response => response.data)
+  return instance.get(`/auth/me`)
+  .then(response => response.data)
 }
 
 

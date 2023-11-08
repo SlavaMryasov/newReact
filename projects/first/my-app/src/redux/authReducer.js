@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { loginRequest } from "../api/api";
 
 const SET_AUTH_ME = 'SET_AUTH_ME';
@@ -32,7 +33,13 @@ export const setAuthUserData = (id, email, login, isAuth) => ({
 export const postLoginTC =(data)=> {
     return (dispatch) => {
         loginRequest(data.login, data.password, data.rememberMe).then(response =>{
-            dispatch(setAuthUserData(response))
+            if(response.resultCode === 0){
+                dispatch(setAuthUserData(response))
+            }
+            else {
+               let message = response.messages.length > 0 ? response.messages[0] : 'some error'
+                dispatch(stopSubmit('login', {_error: message}))    // форма получит общую ошибку
+            }
         })
     }
 }
