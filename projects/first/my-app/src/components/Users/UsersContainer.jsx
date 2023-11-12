@@ -6,6 +6,7 @@ import Users from './Users';
 import { getUsersThunkCreator } from '../../redux/usersReducer';
 import { authWithRedirect } from '../../hocs/authWithRedirect';
 import { compose } from 'redux';
+import { getUsers, getPageSize,getTotalUsersCount, getCurrentPage, getPending,getRequestIsActive, getUsersSuper, getUsersSuperSelector } from '../../redux/usersSelectors';
 
 
 class UsersContainer extends React.Component {
@@ -33,14 +34,25 @@ class UsersContainer extends React.Component {
     }
 }
 
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         pending: state.usersPage.pending,
+//         requestIsActive: state.usersPage.requestIsActive,
+//     }
+// }
+
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        pending: state.usersPage.pending,
-        requestIsActive: state.usersPage.requestIsActive,
+        users: getUsersSuperSelector(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        pending: getPending(state),
+        requestIsActive: getRequestIsActive(state),
     }
 }
 
