@@ -1,5 +1,6 @@
 import styles from './MyProfile.module.css'
 import ProfileStatus from './ProfileStatus/ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 const MyProfile = (props) => {
   return (
@@ -13,7 +14,7 @@ const MyProfile = (props) => {
         <div>{props.aboutMe}</div>
       </div>
       <div className={styles.status}>
-      <ProfileStatus userId ={props.userId} status={props.status} updateUserStatus={props.updateUserStatus}/>
+      <ProfileStatusWithHooks userId ={props.userId} status={props.status} updateUserStatus={props.updateUserStatus}/>
       </div>
     </div>
   )
