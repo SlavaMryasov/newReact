@@ -1,6 +1,7 @@
 import { Field, reduxForm } from 'redux-form';
 import Post from './Post/Post';
 import styles from './Posts.module.css';
+import React from 'react';
 
   const PostForm = (props) => {
     return (
@@ -17,8 +18,8 @@ import styles from './Posts.module.css';
   
   const PostFormRedux = reduxForm({ form: 'addPostForm' })(PostForm)
   
-  const Posts = (props) => {
-//console.log(props, 'dasd')
+  const Posts = React.memo((props) => {
+console.log( 'dasd')
     const newPost = (values)=> {
       props.addNewPost({id:4, message:values.textareaForPost, likesCount: 2})
     }
@@ -36,6 +37,6 @@ import styles from './Posts.module.css';
       </div>
     </div>
   )
-}
+})
 
 export default Posts
