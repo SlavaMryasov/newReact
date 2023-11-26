@@ -11,7 +11,6 @@ const initialStore = {
 const postsReducer = (state = initialStore, action) => {
   switch (action.type){
     case SET_POSTS: {
-      console.log(action.postsData, 'dawdaa')
       return{
         ...state,
         postsData: action.postsData
